@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthorController extends Controller
@@ -210,10 +211,19 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( author $author)
     {
 
-        $authors = Author::destroy($id);
-        return response()->json(['icon' => 'success','title'=>'Deleted is Successfully'],200);
+
+
+        if($author->id == Auth::id()){
+            return redirect()->route('authors.index')->withErrors(trans('cannot delete yourself'));
+
+        }else{
+        $author->user()->delete();
+        $isDeleted = $author->delete();
+        return response()->json(['icon' => 'success','title'=>'author Deleted is Successfully'],200);
+
+        }
     }
 }

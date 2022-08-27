@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -209,9 +210,25 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Admin $admin)
     {
-        $admins = Admin::destroy($id);
-        return response()->json(['icon' => 'success','title'=>'Deleted is Successfully'],200);
+
+
+        if($admin->id == Auth::id()){
+            return redirect()->route('authors.index')->withErrors(trans('cannot delete yourself'));
+
+        }else{
+        $admin->user()->delete();
+        $isDeleted = $admin->delete();
+        return response()->json(['icon' => 'success','title'=>'Admin Deleted is Successfully'],200);
+
+        }
     }
+
+    // public function indexDelete(){
+    //     $admins = Admin::onlyTrashed()->get();
+    //     return response()->view('cms')
+    // }
+
+
 }

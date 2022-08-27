@@ -26,6 +26,9 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('cms/plugins/summernote/summernote-bs4.min.css') }}">
 
+     <!-- favicon  -->
+     <link rel="shortcut icon" href="{{ asset('cms/dist/img/favicon.png') }}" type="image/x-icon">
+
   {{-- <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"> --}}
   <link rel="stylesheet" href="{{ asset('cms/plugins/toastr/toastr.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -50,9 +53,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li>
+      </li> --}}
     </ul>
 
     <!-- Right navbar links -->
@@ -182,8 +185,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="{{ asset('cms/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <img src="{{ asset('cms/dist/img/news-logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">NEWS SYSTEM</span>
     </a>
 
     <!-- Sidebar -->
@@ -197,16 +200,16 @@
           @if (auth('admin')->user()->image !='')
           <img class="brand-image img-circle elevation-3" src="{{ asset('storage/images/admin/' . auth('admin')->user()->image) }}"alt="User Image">
           @else
-          <img class="brand-image img-circle elevation-3" src="{{ asset('cms/dist/img/img_422573.png') }}"alt="User Image">
+          <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image">
           @endif
        @endif
 
 
        @if (Auth::guard('author')->id())
         @if (auth('author')->user()->image !='')
-        <img class="brand-image img-circle elevation-3" src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image">
+        <img class="brand-image img-circle elevation-3 " src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image">
         @else
-        <img class="brand-image img-circle elevation-3" src="{{ asset('cms/dist/img/img_422573.png') }}"alt="User Image">
+        <img class="brand-image img-circle img-bordered-sm " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image">
         @endif
         @endif
         </div>
