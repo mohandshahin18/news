@@ -6,6 +6,9 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +62,19 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
     Route::post('update_articles/{id}', [ArticleController::class , 'update'])->name('update_articles');
     Route::get('create/articles/{id}' , [ArticleController::class , 'createAritcle'])->name('createAritcle');
     Route::get('index/articles/{id}' , [ArticleController::class , 'indexArticle'])->name('indexArticle');
+
+
+    Route::resource('roles',RoleController::class);
+    Route::post('update_roles/{id}', [RoleController::class , 'update'])->name('update_roles');
+
+
+    Route::resource('permissions',PermissionController::class);
+    Route::post('update_permissions/{id}', [PermissionController::class , 'update'])->name('update_permissions');
+
+
+    Route::resource('roles.permissions',RolePermissionController::class);
+
+
 
 
 });
