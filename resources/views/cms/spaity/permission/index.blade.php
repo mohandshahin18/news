@@ -61,7 +61,8 @@
                     <tr>
                         <td>{{ $permission->id }}</td>
                         <td>{{ $permission->name }}</td>
-                        <td>{{ $permission->guard_name }}</td>
+                        <td> <span class="badge bg-success">  {{ $permission->guard_name }} </span></td>
+
                         <td>
                             <div style="display: flex; gap: 5px;">
                                 <a href="{{ route('permissions.edit' , $permission->id )}}" type="button" class="btn btn-primary">Edit</a>

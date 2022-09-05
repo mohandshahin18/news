@@ -14,7 +14,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::orderBy('id', 'desc')->Paginate(7);
+        $permissions = Permission::orderBy('id', 'desc')->Paginate(4);
         return response()->view('cms.spaity.permission.index' , compact('permissions'));
     }
 

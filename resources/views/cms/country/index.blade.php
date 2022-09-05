@@ -47,7 +47,9 @@
                 <th>Country Name</th>
                 <th>Code</th>
                 <th >Number Of Cities</th>
-                <th>Settings</th>
+                @canany(['Edit-Country' , 'Delete-Country'])
+                    <th>Settings</th>
+                @endcanany
               </tr>
             </thead>
             <tbody>
@@ -59,20 +61,29 @@
                         <td>{{ $country->country_name }}</td>
                         <td>{{ $country->code }}</td>
                         <td  ><p style="display: inline-block; background: #28a745; border: 1px solid #28a745;  color: #fff; padding: 8px; border-radius: 28%; margin: 0;" >{{ $country->cities_count }}</p></td>
+                        @canAny(['Edit-Country' , 'Delete-Country'])
                         <td>
                             <div style="display: flex; gap: 5px;">
-                                <a href="{{ route('countries.edit' , $country->id )}}" type="button" class="btn btn-primary">Edit</a>
-                                <div>
+                                @can('Edit-Country')
+                                    <a href="{{ route('countries.edit' , $country->id )}}" type="button" class="btn btn-primary">Edit</a>
+                                @endcan
+
+                               @can('Delete-Country')
+                               <div>
                                     <form action="{{ route('countries.destroy' , $country->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                                        <button type="submit" class="btn btn-danger">Delete</button>
 
                                     </form>
                                 </div>
+                                @endcan
+
                                 {{-- <button type="button" class="btn btn-success">Information</button> --}}
                               </div>
                         </td>
+                        @endcanAny
                       </tr>
 
                 @endforeach

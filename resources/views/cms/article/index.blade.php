@@ -27,7 +27,16 @@
       <div class="card">
         <div class="card-header">
           {{-- <h3 class="card-title">Table Of Category</h3> --}}
+
+          @can('Create-Article')
+
+          @if( Auth::guard('author')->id())
           <a href="{{ route('createAritcle' , $id) }}" type="button" class="btn btn-primary">Add New Article </a>
+          @endif
+
+          {{-- <a href="{{ route('createAritcle' , $id) }}" type="button" class="btn btn-primary">Add New Article </a> --}}
+
+          @endcan
 
 
           <div class="card-tools">
@@ -51,7 +60,9 @@
                 <th>Title</th>
                 <th>Short Description</th>
                 <th>Category</th>
+                @canAny(['Edit-Article' , 'Delete-Article' ])
                 <th>Settings</th>
+                @endcanAny
               </tr>
             </thead>
             <tbody>
@@ -63,13 +74,27 @@
                         <td>{{ $article->title ?  $article->title : "Not Found"}}</td>
                         <td >{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
                         <td>{{ $article->category->name ?$article->category->name  : "Not Found"}}</td>
-
+                        @canAny(['Edit-Article' , 'Delete-Article' ])
                         <td>
                             <div style="display: flex; gap: 5px;">
+                                @can('Edit-Article')
+                                @if(Auth::guard('author' )->id())
+
                                 <a href="{{ route('articles.edit' , $article->id )}}" type="button" class="btn btn-primary">Edit</a>
+                                @endif
+
+                                @endcan
+
+
+                                @can('Delete-Article')
+                                {{-- @if(Auth::guard('author' )->id() ) --}}
                                 <a href="#" onclick="performDestroy({{ $article->id }},this)" type="button" class="btn btn-danger">Delete</a>
+                                {{-- @endif --}}
+                                @endcan
+
                               </div>
                         </td>
+                        @endcanAny
                       </tr>
 
                 @endforeach
@@ -83,7 +108,11 @@
 
 
         <div class="card-footer" >
+            @if( Auth::guard('admin')->id())
             <a href="{{ route('authors.index') }}" type="button" class="btn btn-primary">Return Back</a>
+            @elseif(Auth::guard('author')->id())
+            <a href="{{ route('index-author') }}" type="button" class="btn btn-primary">Return Back</a>
+            @endif
           </div>
         <!-- /.card-body -->
       </div>

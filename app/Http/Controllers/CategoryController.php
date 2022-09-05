@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\category;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class CategoryController extends Controller
     {
 
         $categories = Category::orderBy('id', 'desc')->Paginate(7);
+        $this->authorize('viewAny', category::class);
         return response()->view('cms.category.index', compact('categories'));
 
     }
@@ -27,6 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', category::class);
         return response()->view('cms.category.create');
 
     }
@@ -86,6 +89,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $categories = category::findOrFail($id);
+        $this->authorize('update', category::class);
+
         return response()->view('cms.category.edit' , compact('categories' ));
     }
 
@@ -135,6 +140,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $categories = category::destroy($id);
+        $this->authorize('delete', category::class);
+
         return response()->json(['icon' => 'success','title'=>'Deleted is Successfully'],200);
     }
 }

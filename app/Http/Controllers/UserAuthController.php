@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Article;
+use App\Models\Author;
+use App\Models\category;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class UserAuthController extends Controller
 {
@@ -52,5 +58,38 @@ class UserAuthController extends Controller
         $request->session()->invalidate();
         return redirect()->route('login.view' , $guard);
     }
+
+
+
+    public function editAdminProfile(Request $request){
+        $admins = Admin::findOrfail(Auth::guard('admin')->id());
+        $countries = Country::all();
+        return response()->view('cms.auth.edit-profile-admin' , compact('admins','countries'));
+    }
+
+    public function editAuhtorProfile(Request $request){
+        $authors = Author::findOrfail(Auth::guard('author')->id());
+        $countries = Country::all();
+        return response()->view('cms.auth.edit-profile-author' , compact('authors','countries'));
+    }
+
+    public function indexAuthor(Request $request){
+        $authors = Author::findOrfail(Auth::guard('author')->id())->withCount('articles')->with('user')->orderBy('id', 'desc')->Paginate(7);
+        $countries = Country::all();
+        $roles = Role::all();
+        return response()->view('cms.auth.indexAuthor' , compact('authors','countries','roles'));
+
+    }
+
+    public function createArticle(){
+        $authors = Author::findOrfail(Auth::guard('author')->id());
+        $this->authorize('create', Article::class);
+        $categories = category::all();
+        return response()->view('cms.auth.createArticle' , compact('authors','categories'));
+    }
+
+
+
+
 
 }

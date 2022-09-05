@@ -27,7 +27,9 @@
       <div class="card">
         <div class="card-header">
           {{-- <h3 class="card-title">Table Of Category</h3> --}}
+          @can('Create-Category')
           <a href="{{ route('categories.create') }}" type="button" class="btn btn-primary">Add New Category</a>
+          @endcan
 
 
           <div class="card-tools">
@@ -50,7 +52,9 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
+                @canAny(['Edit-Category','Delete-Category'])
                 <th>Settings</th>
+                @endcanAny
               </tr>
             </thead>
             <tbody>
@@ -61,13 +65,21 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name ?  $category->name : "Not Found"}}</td>
                         <td style="max-width: 120px;   overflow: hidden;">{{ $category->description ? $category->description : "Not Found"}}</td>
-
+                        @canAny(['Edit-Category','Delete-Category'])
                         <td>
                             <div style="display: flex; gap: 5px;">
+                                @can('Edit-Category')
                                 <a href="{{ route('categories.edit' , $category->id )}}" type="button" class="btn btn-primary">Edit</a>
+
+                                @endcan
+                                @can('Delete-Category')
                                 <a href="#" onclick="performDestroy({{ $category->id }},this)" type="button" class="btn btn-danger">Delete</a>
+
+                                @endcan
                               </div>
                         </td>
+                        @endcanAny
+
                       </tr>
 
                 @endforeach

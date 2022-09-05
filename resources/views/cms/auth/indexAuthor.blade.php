@@ -67,8 +67,10 @@
             </thead>
             <tbody>
 
-                @foreach($authors as $author)
 
+
+                @foreach($authors as $author)
+                @if(Auth::guard('author')->id()==$author->id)
                     <tr>
                         <td>{{ $author->id }}</td>
                         <td>{{ $author->user ? $author->user->firstname . " " . $author->user->lastname : "Not Found"  }}</td>
@@ -101,8 +103,10 @@
                         </td>
                         @endcanAny
                       </tr>
-
+                      @endif
                 @endforeach
+
+
 
 
 

@@ -62,7 +62,7 @@
                     <tr>
                         <td>{{ $role->id }}</td>
                         <td>{{ $role->name }}</td>
-                        <td>{{ $role->guard_name }}</td>
+                        <td> <span class="badge bg-success">  {{ $role->guard_name }} </span> </td>
                         <td><a href="{{ route('roles.permissions.index'  , $role->id)  }}" class="btn btn-info" > ({{ $role->permissions_count }}) Permission/s</a></td>
 
                         <td>

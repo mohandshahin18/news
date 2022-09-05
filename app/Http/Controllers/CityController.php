@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\City;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class CityController extends Controller
     public function index()
     {
         $cities = City::with('country')->orderBy('id', 'desc')->Paginate(7);
+        $this->authorize('viewAny', City::class);
         return response()->view('cms.city.index', compact('cities'));
     }
 
@@ -27,6 +29,7 @@ class CityController extends Controller
     public function create()
     {
        $countries = Country::all();
+       $this->authorize('create', City::class);
        return response()->view('cms.city.create',compact('countries'));
     }
 
@@ -88,6 +91,7 @@ class CityController extends Controller
     {
         $countries = Country::all();
         $cities = City::findOrFail($id);
+        $this->authorize('update', City::class);
         return response()->view('cms.city.edit' , compact('countries', 'cities' ));
     }
 
@@ -139,6 +143,7 @@ class CityController extends Controller
     public function destroy($id)
     {
         $cities = City::destroy($id);
+        $this->authorize('delete', City::class);
         return response()->json(['icon' => 'success','title'=>'Deleted is Successfully'],200);
     }
 }

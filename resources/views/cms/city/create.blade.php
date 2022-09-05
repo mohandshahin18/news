@@ -12,7 +12,11 @@
 @section('sub-title' , 'create city')
 
 
+{{-- @section('city_active' , 'active') --}}
+
+@section('city_open' , 'menu-is-opening menu-open')
 @section('city_active' , 'active')
+@section('city-create_active' , 'active')
 
 @section('content')
 

@@ -46,6 +46,19 @@
 
             </div>
 
+            <div class="form-group col-md-4">
+                <label for="role_id">Role Name</label>
+                <select class="form-control select2 select2-hidden-accessible" name="role_id" id="role_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+
+                    @foreach ($roles as $role )
+                    <option value="{{ $role->id }}"  data-select2-id="3">{{ $role->name }}</option>
+
+                    @endforeach
+
+
+                </select>
+
+            </div>
 
 
             <div class="col-md-4">
@@ -159,6 +172,7 @@
             formData.append('image',document.getElementById('image').files[0]);
             formData.append('file',document.getElementById('file').files[0]);
             formData.append('country_id',document.getElementById('country_id').value);
+            formData.append('role_id',document.getElementById('role_id').value);
 
             store('/cms/admin/authors' , formData);
         }

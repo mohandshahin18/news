@@ -89,6 +89,7 @@
         formData.append('short_description',document.getElementById('short_description').value);
         formData.append('full_description',document.getElementById('full_description').value);
         formData.append('category_id',document.getElementById('category_id').value);
+        // formData.append('role_id',document.getElementById('category_id').value);
             formData.append('author_id',document.getElementById('author_id').value);
 
         storeRoute('/cms/admin/update_articles/'+id , formData);

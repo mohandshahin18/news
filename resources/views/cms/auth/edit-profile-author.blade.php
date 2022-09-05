@@ -1,26 +1,26 @@
 @extends('cms.parent')
 
 
-@section('title' , 'Edit Author')
+@section('title' , 'Edit Profile')
 
 @section('styles')
 
 @endsection
 
-@section('main-title' , 'Edit Author')
+@section('main-title' , 'Edit Profile')
 
-@section('sub-title' , 'edit author')
+@section('sub-title' , 'edit profile')
 
 
 {{-- @section('author_open' , 'menu-is-opening menu-open') --}}
-@section('author_active' , 'active')
+@section('profile_active' , 'active')
 
 @section('content')
 
 <div class="container-fluid">
     <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Edit Author</h3>
+          <h3 class="card-title">Edit Profile</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -130,7 +130,7 @@
 
           <div class="card-footer">
             <a href="#" onclick="performSUpdate({{ $authors->id }})" type="button" class="btn btn-primary">Update</a>
-            <a href="{{ route('authors.index') }}" type="button" class="btn btn-primary">Return Back</a>
+            {{-- <a href="{{ route('authors.index') }}" type="button" class="btn btn-primary">Return Back</a> --}}
 
 
         </div>

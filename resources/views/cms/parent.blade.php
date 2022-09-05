@@ -60,6 +60,15 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <li>
+            @can('Create-Article')
+            @if (Auth::guard('author')->id())
+            <a href="{{ route('create-article') }}" type="button" class="btn btn-primary">Add New Article </a>
+            @endif
+            @endcan
+
+          </li>
+
       <!-- Navbar Search -->
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -172,12 +181,15 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
-      </li>
+      </li> --}}
+
+
     </ul>
+
   </nav>
   <!-- /.navbar -->
 
@@ -316,10 +328,10 @@
           </li>
 
 
-
+          @canany(['Index-Admin' , 'Create-Admin' , 'Index-Author' , 'Create-Author' ])
 
           <li class="nav-header">User Manegment</li>
-
+          @canany(['Index-Admin' , 'Create-Admin'])
           <li class="nav-item @yield('admin_open')">
             <a href="#" class="nav-link @yield('admin_active')">
               <i class="nav-icon fas fa-user"></i>
@@ -330,20 +342,32 @@
             </a>
             <ul class="nav nav-treeview">
 
+                @can('Index-Admin')
               <li class="nav-item ">
                 <a href="{{ route('admins.index') }}" class="nav-link @yield('admin-index-active')">
                   <i class="fas fa-list nav-icon"></i>
                   <p>index</p>
                 </a>
               </li>
+              @endcan
+
+              @can('Create-Admin')
               <li class="nav-item ">
                 <a href="{{ route('admins.create') }}" class="nav-link @yield('admin-create_active')">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>Create</p>
                 </a>
               </li>
+              @endcan
+
             </ul>
           </li>
+          @endcanany
+
+
+
+
+          @canany(['Index-Author' , 'Create-Author'])
 
           <li class="nav-item @yield('author_open')">
             <a href="#" class="nav-link @yield('author_active')">
@@ -354,50 +378,76 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-
+                @can('Index-Author')
               <li class="nav-item ">
-                <a href="{{ route('authors.index') }}" class="nav-link @yield('author-index_active')">
+                {{-- <a href="{{ route('authors.index') }}" class="nav-link @yield('author-index_active')"> --}}
+                    @if (Auth::guard('admin')->id())
+                    <a href="{{ route('authors.index')}}" class="nav-link @yield('author-index_active') ">
+                    @elseif(Auth::guard('author')->id())
+                    <a href="{{ route('index-author')}}" class="nav-link @yield('author-index_active') ">
+                    @endif
                   <i class="fas fa-list nav-icon"></i>
                   <p>index</p>
                 </a>
               </li>
+              @endcan
+              @can('Create-Author')
+
               <li class="nav-item ">
                 <a href="{{ route('authors.create') }}" class="nav-link @yield('author-create_active')">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>Create</p>
                 </a>
               </li>
+
+              @endcan
+
             </ul>
           </li>
+          @endcanany
+
+          @endcanany
 
 
+          @canany(['Index-Country' , 'Create-Country' , 'Index-City' , 'Create-City' , 'Index-Article' , 'Create-Article'])
           <li class="nav-header">Resourse Manegment</li>
 
+          @canany(['Index-Country' , 'Create-Country'])
           <li class="nav-item">
             <a href="#" class="nav-link @yield('country_active')">
-              <i class="nav-icon fas fa-flag"></i>
-              <p>
+            <i class="nav-icon fas fa-flag"></i>
+            <p>
                 Country
                 <i class="fas fa-angle-left right"></i>
-              </p>
+            </p>
             </a>
+
             <ul class="nav nav-treeview">
+                @can('Index-Country')
+                <li class="nav-item">
+                    <a href="{{ route('countries.index')}}" class="nav-link ">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>index</p>
+                    </a>
+                </li>
+                @endcan
 
-              <li class="nav-item">
-                <a href="{{ route('countries.index')}}" class="nav-link ">
-                    <i class="fas fa-list nav-icon"></i>
-                    <p>index</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('countries.create') }}" class="nav-link">
-                    <i class="fas fa-plus nav-icon"></i>
-                    <p>Create</p>
-                </a>
-              </li>
+                @can('Create-Country')
+                <li class="nav-item">
+                    <a href="{{ route('countries.create') }}" class="nav-link">
+                        <i class="fas fa-plus nav-icon"></i>
+                        <p>Create</p>
+                    </a>
+                </li>
+                @endcan
+
             </ul>
-          </li>
+        </li>
+          @endcanany
 
+
+
+          @canany(['Index-City' , 'Create-City'])
           <li class="nav-item  @yield('city_open')" >
             <a href="#" class="nav-link @yield('city_active')">
               <i class="nav-icon fas fa-city"></i>
@@ -407,22 +457,27 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-
+                @can('Index-City')
               <li class="nav-item">
                 <a href="{{ route('cities.index')}}" class="nav-link @yield('city-index-active') ">
                     <i class="fas fa-list nav-icon"></i>
                     <p>index</p>
                 </a>
               </li>
+              @endcan
+              @can('Create-City')
               <li class="nav-item">
                 <a href="{{ route('cities.create') }}" class="nav-link @yield('city-create_active')">
                     <i class="fas fa-plus nav-icon"></i>
                     <p>Create</p>
                 </a>
               </li>
+              @endcan
             </ul>
           </li>
+          @endcanany
 
+          @canany(['Index-Category' , 'Create-Category'])
           <li class="nav-item @yield('category_open')">
             <a href="#" class="nav-link @yield('category_active')">
               <i class="nav-icon fas fa-stream"></i>
@@ -432,23 +487,32 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-
+                @can('Index-Category')
               <li class="nav-item ">
                 <a href="{{ route('categories.index') }}" class="nav-link @yield('category-index-active')">
                   <i class="fas fa-list nav-icon"></i>
                   <p>index</p>
                 </a>
               </li>
+              @endcan
+
+              @can('Create-Category')
               <li class="nav-item ">
                 <a href="{{ route('categories.create') }}" class="nav-link @yield('category-create_active')">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>Create</p>
                 </a>
               </li>
+              @endcan
+
             </ul>
           </li>
+          @endcanany
 
 
+
+
+          @canany(['All-Article'])
           <li class="nav-item  @yield('article_open')" >
             <a href="#" class="nav-link @yield('article_active')">
               <i class="nav-icon fas fa-newspaper"></i>
@@ -459,20 +523,33 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-
+                @can('Index-Article')
               <li class="nav-item">
                 <a href="{{ route('articles.index')}}" class="nav-link @yield('article-index-active') ">
                     <i class="fas fa-list nav-icon"></i>
                     <p>index</p>
                 </a>
               </li>
+              @endcan
+
 
             </ul>
           </li>
+          @endcanany
+
+          @endcanany
+
+
+
+
 
           <li class="nav-header">Setting</li>
           <li class="nav-item">
-            <a href="#" class="nav-link" @yield('Profile_active')>
+            @if (Auth::guard('admin')->id())
+            <a href="{{ route('edit-profile-admin') }}" class="nav-link  @yield('profile_active')">
+            @elseif(Auth::guard('author')->id())
+            <a href="{{ route('edit-profile-author') }}" class="nav-link  @yield('profile_active')">
+            @endif
               <i class="nav-icon fas fa-edit"></i>
               <p class="text">Edit Profile</p>
             </a>

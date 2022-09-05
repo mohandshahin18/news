@@ -18,14 +18,14 @@ class Article extends Model
     }
 
 
-    protected static function boot() {
-        parent::boot();
+    // protected static function boot() {
+    //     parent::boot();
 
-        static::deleting(function($article) {
-            $article->author()->user()->delete();
+    //     static::deleting(function($article) {
+    //         $article->author()->user()->delete();
 
-        });
-    }
+    //     });
+    // }
 
 
 }

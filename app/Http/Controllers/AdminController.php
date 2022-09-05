@@ -9,6 +9,7 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -22,7 +23,9 @@ class AdminController extends Controller
 
 
         $admins = Admin::with('user')->orderBy('id', 'desc')->Paginate(7);
-        return response()->view('cms.admin.index', compact('admins'));
+        $this->authorize('viewAny', Admin::class);
+        $roles = Role::all();
+        return response()->view('cms.admin.index', compact('admins','roles'));
 
     }
 
@@ -33,9 +36,10 @@ class AdminController extends Controller
      */
     public function create()
     {
-
+        $roles = Role::where('guard_name','admin')->get();
+        $this->authorize('create', Admin::class);
         $countries = Country::all();
-        return response()->view('cms.admin.create' , compact('countries'));
+        return response()->view('cms.admin.create' , compact('countries','roles'));
     }
 
     public function AdminCreate($id){
@@ -55,7 +59,6 @@ class AdminController extends Controller
             'firstname' =>'required|string|min:3|max:30',
             'lastname' =>'required|string|min:3|max:30',
             'mobile' =>'required|string|min:10|max:14',
-            // 'image'  => 'nullable|image',
             'email' =>'required|email|unique:admins,email'
 
 
@@ -69,12 +72,13 @@ class AdminController extends Controller
 
             $admins->email= $request->get('email');
             $admins->password=Hash::make( $request->get('password'));
-
             $isSaved = $admins->save();
 
             if($isSaved){
 
                 $users = new User();
+                $roles = Role::findOrFail($request->get('role_id'));
+                $admins->assignRole($roles->name);
 
                 if(request()->hasFile('image')){
                     $image = $request->file('image');
@@ -129,9 +133,11 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::where('guard_name','admin')->get();
+        $this->authorize('update', Admin::class);
         $countries = Country::all();
         $admins = Admin::with('user')->findOrFail($id);
-        return response()->view('cms.admin.edit' , compact('countries' , 'admins'));
+        return response()->view('cms.admin.edit' , compact('countries' , 'admins','roles'));
     }
 
     /**
@@ -147,7 +153,6 @@ class AdminController extends Controller
             'firstname' =>'required|string|min:3|max:30',
             'lastname' =>'required|string|min:3|max:30',
             'mobile' =>'required|string|min:10|max:14',
-            // 'image' => 'image|mimes:png,jpg,jpeg,JPG',
 
         ],[
 
@@ -158,12 +163,15 @@ class AdminController extends Controller
 
             $admins->email= $request->get('email');
 
-            $isSaved = $admins->save();
+
+            $isUpdate = $admins->save();
 
 
-            if($isSaved){
+            if($isUpdate){
 
                 $users = $admins->user;
+                // $roles = Role::findOrFail($request->get('role_id'));
+                // $admins->assignRole($roles->name);
 
                 if(request()->hasFile('image')){
                     $image = $request->file('image');
@@ -185,7 +193,7 @@ class AdminController extends Controller
                 $users->country_id= $request->get('country_id');
                 $users->actor()->associate($admins);
 
-                $isSaved = $users->save();
+                $isUpdate = $users->save();
 
 
                 return ['redirect' =>route('admins.index')];
@@ -213,9 +221,10 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
 
-
+        $this->authorize('delete', Admin::class);
         if($admin->id == Auth::id()){
-            return redirect()->route('authors.index')->withErrors(trans('cannot delete yourself'));
+            return redirect()->route('admins.index')->withErrors(trans('cannot delete yourself'));
+            // return response()->json(['icon' => 'error','title'=>'cannot delete yourself'],400);
 
         }else{
         $admin->user()->delete();
@@ -225,10 +234,6 @@ class AdminController extends Controller
         }
     }
 
-    // public function indexDelete(){
-    //     $admins = Admin::onlyTrashed()->get();
-    //     return response()->view('cms')
-    // }
 
 
 }

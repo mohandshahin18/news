@@ -13,12 +13,15 @@ class ArticleController extends Controller
 
     public function indexArticle($id){
         $articles = Article::where('author_id',$id)->with('category')->orderBy('id', 'desc')->Paginate(7);
+        $this->authorize('viewAny', Article::class);
+
         return response()->view('cms.article.index' , compact('articles','id'));
 
     }
 
     public function createAritcle($id){
         $categories = category::all();
+        $this->authorize('create', Article::class);
         return response()->view('cms.article.create' , compact('categories' , 'id'));
 
     }
@@ -32,6 +35,7 @@ class ArticleController extends Controller
     {
 
         $articles =Article::orderBy('id', 'desc')->with('author')->Paginate(7);
+        $this->authorize('viewAny', Article::class);
         return response()->view('cms.article.indexAll' , compact('articles'));
     }
 
@@ -44,6 +48,7 @@ class ArticleController extends Controller
     {
         $categories = category::all();
         $authors = Author::all();
+        $this->authorize('create', Article::class);
         return response()->view('cms.article.create' , compact('categories','authors'));
     }
 
@@ -56,7 +61,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validator = validator($request->all(),[
-            // 'name' =>'required|string|min:3|max:30',
+            'title' =>'required|string|min:3|max:30',
         ],[
 
         ]);
@@ -106,6 +111,8 @@ class ArticleController extends Controller
         $authors = Author::all();
         $categories = category::all();
         $articles = Article::findOrFail($id);
+        $this->authorize('update', Article::class);
+
         return response()->view('cms.article.edit' , compact('categories' , 'articles' , 'authors'));
     }
 
@@ -158,6 +165,8 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $articles = Article::destroy($id);
+        $this->authorize('delete', Article::class);
+
         return response()->json(['icon' => 'success','title'=>'Deleted is Successfully'],200);
     }
 }

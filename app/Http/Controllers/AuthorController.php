@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AuthorController extends Controller
 {
@@ -20,7 +21,9 @@ class AuthorController extends Controller
     {
 
         $authors = Author::withCount('articles')->with('user')->orderBy('id', 'desc')->Paginate(7);
-        return response()->view('cms.author.index', compact('authors'));
+        $this->authorize('viewAny', Author::class);
+        $roles = Role::all();
+        return response()->view('cms.author.index', compact('authors' , 'roles'));
 
     }
 
@@ -31,8 +34,10 @@ class AuthorController extends Controller
      */
     public function create()
     {
+        $roles = Role::where('guard_name','author')->get();
         $countries = Country::all();
-        return response()->view('cms.author.create' , compact('countries'));
+        $this->authorize('Create', Author::class);
+        return response()->view('cms.author.create' , compact('countries' , 'roles'));
     }
 
     /**
@@ -76,6 +81,8 @@ class AuthorController extends Controller
             if($isSaved){
 
                 $users = new User();
+                $roles = Role::findOrFail($request->get('role_id'));
+                $authors->assignRole($roles->name);
 
                 if(request()->hasFile('image')){
                     $image = $request->file('image');
@@ -131,6 +138,7 @@ class AuthorController extends Controller
     public function edit($id)
     {
         $countries = Country::all();
+        $this->authorize('update', Author::class);
         $authors = Author::with('user')->findOrFail($id);
         return response()->view('cms.author.edit' , compact('countries' , 'authors'));
     }
@@ -215,7 +223,7 @@ class AuthorController extends Controller
     {
 
 
-
+        $this->authorize('delete', Author::class);
         if($author->id == Auth::id()){
             return redirect()->route('authors.index')->withErrors(trans('cannot delete yourself'));
 

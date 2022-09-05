@@ -36,8 +36,15 @@ Route::prefix('cms/')->middleware('guest:admin,author')->group(function(){
 
 Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
     Route::get('logout', [UserAuthController::class , 'logout'])->name('cms.auth.logout');
+    Route::get('profile/edit/admin', [UserAuthController::class , 'editAdminProfile'])->name('edit-profile-admin');
+    Route::get('profile/edit/author', [UserAuthController::class , 'editAuhtorProfile'])->name('edit-profile-author');
+    Route::get('index/author', [UserAuthController::class , 'indexAuthor'])->name('index-author');
+    Route::get('create/article', [UserAuthController::class , 'createArticle'])->name('create-article');
+
 
 });
+
+
 Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
     Route::view('','cms.parent');
     // Route::view('temp','cms.temp');
