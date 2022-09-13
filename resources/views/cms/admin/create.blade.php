@@ -40,7 +40,7 @@
                 <select class="form-control select2 select2-hidden-accessible" name="country_id" id="country_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 
                     @foreach ($countries as $country )
-                    <option value="{{ $country->id }}"  data-select2-id="3">{{ $country->country_name }}</option>
+                    <option value="{{ $country->id }}"  >{{ $country->country_name }}</option>
 
                     @endforeach
 
@@ -48,6 +48,7 @@
                 </select>
 
             </div>
+
 
 
             <div class="form-group col-md-4">

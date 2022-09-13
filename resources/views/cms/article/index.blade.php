@@ -11,9 +11,9 @@
 
 @section('sub-title' , 'index article')
 
-{{-- @section('article_open' , 'menu-is-opening menu-open') --}}
+@section('article_open' , 'menu-is-opening menu-open')
 @section('article_active' , 'active')
-{{-- @section('article-index-active' , 'active') --}}
+@section('my-article-index-active' , 'active')
 
 
 @section('content')
@@ -71,8 +71,8 @@
 
                     <tr>
                         <td>{{ $article->id }}</td>
-                        <td>{{ $article->title ?  $article->title : "Not Found"}}</td>
-                        <td >{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
+                        <td style="width: 100px">{{ $article->title ?  $article->title : "Not Found"}}</td>
+                        <td  style="width: 100px">{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
                         <td>{{ $article->category->name ?$article->category->name  : "Not Found"}}</td>
                         @canAny(['Edit-Article' , 'Delete-Article' ])
                         <td>
@@ -111,7 +111,7 @@
             @if( Auth::guard('admin')->id())
             <a href="{{ route('authors.index') }}" type="button" class="btn btn-primary">Return Back</a>
             @elseif(Auth::guard('author')->id())
-            <a href="{{ route('index-author') }}" type="button" class="btn btn-primary">Return Back</a>
+            <a href="{{ route('index-author') }}" type="button" class="btn btn-primary">Index Author</a>
             @endif
           </div>
         <!-- /.card-body -->

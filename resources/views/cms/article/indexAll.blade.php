@@ -49,6 +49,7 @@
                 <th>ID</th>
                 <th>Title</th>
                 <th>Short Description</th>
+                <th>Category Name</th>
                 <th>Author Name</th>
                 {{-- <th>Settings</th> --}}
               </tr>
@@ -61,6 +62,7 @@
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->title ?  $article->title : "Not Found"}}</td>
                         <td >{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
+                        <td >{{ $article->category ? $article->category->name  : "Not Found"}}</td>
                         <td >{{ $article->author ?  $article->author->user->firstname . " " . $article->author->user->lastname : "Not Found"}}</td>
 
                       </tr>

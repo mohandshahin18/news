@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\City;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +19,25 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
 
-        $admins = Admin::with('user')->orderBy('id', 'desc')->Paginate(7);
+        $admins = Admin::with('user')->orderBy('id', 'desc');
         $this->authorize('viewAny', Admin::class);
         $roles = Role::all();
+
+
+        if ($request->get('email')) {
+            $admins = $admins->where('email', 'like', '%' . $request->email . '%');
+        }
+
+        $admins = $admins->Paginate(7);
+
+
         return response()->view('cms.admin.index', compact('admins','roles'));
+
+
 
     }
 
@@ -114,6 +126,8 @@ class AdminController extends Controller
         }
     }
 
+
+
     /**
      * Display the specified resource.
      *
@@ -195,8 +209,13 @@ class AdminController extends Controller
 
                 $isUpdate = $users->save();
 
+                if(Auth::guard('admin')->id() == $admins->id){
+                    return ['redirect' =>route('profile')];
+                }else{
+                    return ['redirect' =>route('admins.index')];
 
-                return ['redirect' =>route('admins.index')];
+                }
+
 
                 return response()->json(['icon' => 'success','title'=>'Updated is Successfully'],200);
 

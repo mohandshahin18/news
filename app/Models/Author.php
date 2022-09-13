@@ -44,10 +44,10 @@ class Author extends Authenticatable
 
         static::deleting(function($auhtor) {
             $auhtor->user()->delete();
-            // $auhtor->articles()->delete();
-
-
+            $auhtor->articles()->delete();
         });
     }
+
+
 
 }

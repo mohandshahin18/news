@@ -51,7 +51,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="{{ route('home') }}" class="nav-link">Home</a>
       </li>
       {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -206,7 +206,6 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          {{-- <img src="{{ asset('storage/images/admin/' .auth('admin')->user()->image ) }}" class="img-circle elevation-2" alt="User Image"> --}}
 
           @if (Auth::guard('admin')->id())
           @if (auth('admin')->user()->image !='')
@@ -221,7 +220,7 @@
         @if (auth('author')->user()->image !='')
         <img class="brand-image img-circle elevation-3 " src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image">
         @else
-        <img class="brand-image img-circle img-bordered-sm " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image">
+        <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image">
         @endif
         @endif
         </div>
@@ -229,18 +228,15 @@
 
         <div class="info">
             @if (Auth::guard('admin')->id())
-            <a href="#" class="d-block"> {{ auth('admin')->user()->full_name }}</a>
+            <a href="{{ route('profile') }}" class="d-block"> {{ auth('admin')->user()->full_name }}</a>
             @elseif (Auth::guard('author')->id())
-            <a href="#" class="d-block"> {{ auth('author')->user()->full_name }}</a>
+            <a href="{{ route('profile') }}" class="d-block"> {{ auth('author')->user()->full_name }}</a>
             @else
             <a href="#" class="d-block"> users</a>
 
             @endif
         </div>
-{{--
-        <div class="info">
-          <a href="#" class="d-block">{{ auth('admin')->user()->full_name }}</a>
-        </div> --}}
+
       </div>
 
       <!-- SidebarSearch Form -->
@@ -263,7 +259,7 @@
 
 
           <li class="nav-item">
-            <a href="#" class="nav-link @yield('DashBoard_active') ">
+            <a href="{{ route('home') }}" class="nav-link @yield('dashboard_active') ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -272,8 +268,35 @@
 
           </li>
 
+          @canAny(['Index-Role','Create-Role' , 'Index-Permission' , 'Create-Permission'])
 
-          <li class="nav-header">ROle & Permission</li>
+          <li class="nav-header">Role & Permission</li>
+
+          <li class="nav-item @yield('role_open')">
+            <a href="#" class="nav-link @yield('role_active')">
+              <i class="nav-icon fas fa-user-check"></i>
+              <p>
+                Role
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item ">
+                <a href="{{ route('roles.index') }}" class="nav-link @yield('role-index-active')">
+                  <i class="fas fa-list nav-icon"></i>
+                  <p>index</p>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a href="{{ route('roles.create') }}" class="nav-link @yield('roles-create_active')">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Create</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
 
           <li class="nav-item @yield('permission_open')">
             <a href="#" class="nav-link @yield('permission_active')">
@@ -301,31 +324,8 @@
             </ul>
           </li>
 
+@endcanAny
 
-          <li class="nav-item @yield('role_open')">
-            <a href="#" class="nav-link @yield('role_active')">
-              <i class="nav-icon fas fa-user-check"></i>
-              <p>
-                Role
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-              <li class="nav-item ">
-                <a href="{{ route('roles.index') }}" class="nav-link @yield('role-index-active')">
-                  <i class="fas fa-list nav-icon"></i>
-                  <p>index</p>
-                </a>
-              </li>
-              <li class="nav-item ">
-                <a href="{{ route('roles.create') }}" class="nav-link @yield('roles-create_active')">
-                  <i class="fas fa-plus nav-icon"></i>
-                  <p>Create</p>
-                </a>
-              </li>
-            </ul>
-          </li>
 
 
           @canany(['Index-Admin' , 'Create-Admin' , 'Index-Author' , 'Create-Author' ])
@@ -527,17 +527,100 @@
               <li class="nav-item">
                 <a href="{{ route('articles.index')}}" class="nav-link @yield('article-index-active') ">
                     <i class="fas fa-list nav-icon"></i>
-                    <p>index</p>
+                    <p>index all article</p>
                 </a>
               </li>
               @endcan
 
+
+
+              @if (Auth::guard('author')->id())
+              <li class="nav-item">
+                <a href="{{ route('indexArticle' ,Auth::guard('author')->id() )}}" class="nav-link @yield('my-article-index-active') ">
+                    <i class="fas fa-list nav-icon"></i>
+                    <p>index my article</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('create-article')}}" class="nav-link @yield('article-create_active') ">
+                    <i class="fas fa-plus nav-icon"></i>
+                    <p>Create</p>
+                </a>
+              </li>
+
+              @endif
 
             </ul>
           </li>
           @endcanany
 
           @endcanany
+
+
+          {{-- @canany(['All-Article']) --}}
+          <li class="nav-item  @yield('slider_open')" >
+            <a href="#" class="nav-link @yield('slider_active')">
+              <i class="nav-icon fas fa-regular fa-image"></i>
+              <i class=""></i>
+              <p>
+                Slider
+                <i class="fas fa-angle-left right"></i>
+                {{-- <i class="fa-regular fa-image"></i> --}}
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+                {{-- @can('Index-Article') --}}
+              <li class="nav-item">
+                <a href="{{ route('sliders.index')}}" class="nav-link @yield('slider-index-active') ">
+                    <i class="fas fa-list nav-icon"></i>
+                    <p>index</p>
+                </a>
+              </li>
+              {{-- @endcan --}}
+
+              {{-- @if (Auth::guard('author')->id()) --}}
+
+              <li class="nav-item">
+                <a href="{{ route('sliders.create')}}" class="nav-link @yield('slider-create_active') ">
+                    <i class="fas fa-plus nav-icon"></i>
+                    <p>Create</p>
+                </a>
+              </li>
+
+              {{-- @endif --}}
+
+            </ul>
+          </li>
+          {{-- @endcanany
+
+          @endcanany --}}
+
+
+            <li class="nav-item  @yield('message_open')" >
+                <a href="#" class="nav-link @yield('message_active')">
+                  <i class="nav-icon fas fa-envelope"></i>
+                  <i class=""></i>
+                  <p>
+                    Message
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('contacts.index')}}" class="nav-link @yield('message-index-active') ">
+                        <i class="fas fa-list nav-icon"></i>
+                        <p>index</p>
+                    </a>
+                  </li>
+
+
+
+                </ul>
+              </li>
+              {{-- @endcanany
+
+              @endcanany --}}
 
 
 
@@ -555,7 +638,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link" @yield('passwoed_active')>
+            <a href="{{ route('edit-password') }}" class="nav-link @yield('passwoed_active')" >
               <i class="nav-icon fas fa-key"></i>
               <p>Change Password</p>
             </a>
@@ -584,7 +667,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
               <li class="breadcrumb-item active">@yield('sub-title')</li>
             </ol>
           </div><!-- /.col -->

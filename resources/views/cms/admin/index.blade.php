@@ -5,6 +5,7 @@
 
 @section('styles')
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('main-title' , 'Index Admin')
@@ -25,26 +26,34 @@
 
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-          {{-- <h3 class="card-title">Table Of Admin</h3> --}}
+        <div class="card-header ">
           @can('Create-Admin')
-          <a href="{{ route('admins.create') }}" type="button" class="btn btn-primary">Add New Admin</a>
+          <a href="{{ route('admins.create') }}"  class="btn btn-primary">Add New Admin</a>
 
           @endcan
 
 
-          <div class="card-tools">
-            <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-default">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
+
+
+          <div class="card-tools">
+            <form action="" method="POST">
+                  <div class="col-md-6" >
+                     <div class="input-group mb-3" style="width: 230px;">
+                            <input type="text" class="form-control"   placeholder="Search admin" id="search">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text " id="basic-addon1" > <i class="fas fa-search"></i></span>
+                                </div>
+                     </div>
+                 </div>
+            </form>
           </div>
+
+
+
         </div>
+
+
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
           <table class="table table-hover text-nowrap">
@@ -52,7 +61,7 @@
               <tr>
                 <th>ID</th>
                 <th> Name</th>
-                <th>Country</th>
+                {{-- <th>Country</th> --}}
                 <th>Email</th>
                 <th>Mobile</th>
                 {{-- <th>Gender</th> --}}
@@ -72,8 +81,7 @@
                     <tr>
                         <td>{{ $admin->id }}</td>
                         <td>{{ $admin->user ? $admin->user->firstname . " " . $admin->user->lastname: "Not Found" }}</td>
-                        {{-- <td>{{ $admin->user ? $admin->user->lastname : "Not Found"}}</td> --}}
-                        <td>{{ $admin->user->country ? $admin->user->country->country_name : "Not Found"}}</td>
+                        {{-- <td>{{ $admin->user->country ? $admin->user->country->country_name : "Not Found"}}</td> --}}
                         <td>{{ $admin->email }}</td>
                         <td>{{ $admin->user ? $admin->user->mobile : "Not Found"}}</td>
                         {{-- <td>{{ $admin->user ? $admin->user->gender : "Not Found"}}</td> --}}
@@ -87,14 +95,20 @@
                             <img class="img-circle img-bordered-sm" src="{{ asset('storage/images/admin/'.$admin->user->image) }}" width="50" height="50" alt="User Image">
 
                         </td>
+
+
                         @canAny(['Edit-Admin' , 'Delete-Admin'])
                         <td>
                             <div style="display: flex; gap: 5px;">
                                 @can('Edit-Admin')
                                 <a href="{{ route('admins.edit' , $admin->id )}}" type="button" class="btn btn-primary">Edit</a>
                                 @endcan
+
                                 @can('Delete-Admin')
+                                {{-- @if(Auth::guard('admin')->id() == 1) --}}
                                 <a href="#" onclick="performDestroy({{ $admin->id }},this)" type="button" class="btn btn-danger">Delete</a>
+
+                                {{-- @endif --}}
 
                                 @endcan
                               </div>
@@ -131,6 +145,7 @@
             let url  = '/cms/admin/admins/'+id;
             confirmDestroy(url,referance);
         }
+
     </script>
 @endsection
 

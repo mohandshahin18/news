@@ -23,9 +23,10 @@ class UserAuthController extends Controller
 
     // login
     public function login(Request $request){
+
         $validator = validator($request->all(),[
-            'email'=> 'required|email|string',
-            'password'=>'required|string|min:3',
+            'email'=> 'required|email|string', //|exists:admins,email
+            'password'=>'required|string|min:3', //|in:admins,password
         ],[
 
         ]);
@@ -45,7 +46,7 @@ class UserAuthController extends Controller
 
             }
         }else{
-            return response()->json(['icon'=>'erorr' , 'title'=> $validator->getMessageBag()->first()],400);
+            return response()->json(['icon'=>'error' , 'title'=> $validator->getMessageBag()->first()],400);
         }
     }
 

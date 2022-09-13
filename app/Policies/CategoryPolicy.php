@@ -17,11 +17,19 @@ class CategoryPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Admin $admin)
+    public function viewAny()
     {
 
-        return $admin->hasPermissionTo('Index-Category') ?
-        $this->allow() : $this->deny('You cannot access this page');
+        if(auth('admin')->check()){
+            return auth()->user()->hasPermissionTo('Index-Category')
+             ?  $this->allow()
+             : $this->deny('You cannot access this page');
+         }
+         elseif(auth('author')->check()){
+            return auth()->user()->hasPermissionTo('Index-Category')
+             ?  $this->allow()
+             : $this->deny(' You cannot access this page');
+         }
     }
 
     /**
@@ -42,11 +50,19 @@ class CategoryPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Admin $admin)
+    public function create()
     {
 
-        return $admin->hasPermissionTo('Create-Category') ?
-        $this->allow() : $this->deny('You cannot access this page');
+        if(auth('admin')->check()){
+            return auth()->user()->hasPermissionTo('Create-Category')
+             ?  $this->allow()
+             : $this->deny('You cannot access this page');
+         }
+         elseif(auth('author')->check()){
+            return auth()->user()->hasPermissionTo('Create-Category')
+             ?  $this->allow()
+             : $this->deny(' You cannot access this page');
+         }
     }
 
     /**
@@ -56,10 +72,18 @@ class CategoryPolicy
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Admin $admin)
+    public function update()
     {
-        return $admin->hasPermissionTo('Edit-Category' ) ?
-        $this->allow() : $this->deny('You cannot access this page');
+        if(auth('admin')->check()){
+            return auth()->user()->hasPermissionTo('Edit-Category')
+             ?  $this->allow()
+             : $this->deny('You cannot access this page');
+         }
+         elseif(auth('author')->check()){
+            return auth()->user()->hasPermissionTo('Edit-Category')
+             ?  $this->allow()
+             : $this->deny(' You cannot access this page');
+         }
     }
 
     /**
@@ -69,10 +93,18 @@ class CategoryPolicy
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Admin $admin)
+    public function delete()
     {
-        return $admin->hasPermissionTo('Delete-Category' ) ?
-        $this->allow() : $this->deny('You cannot access this page');
+        if(auth('admin')->check()){
+            return auth()->user()->hasPermissionTo('Delete-Category')
+             ?  $this->allow()
+             : $this->deny('You cannot access this page');
+         }
+         elseif(auth('author')->check()){
+            return auth()->user()->hasPermissionTo('Delete-Category')
+             ?  $this->allow()
+             : $this->deny(' You cannot access this page');
+         }
     }
 
     /**

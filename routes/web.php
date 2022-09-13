@@ -5,11 +5,17 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\CommerntController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\Website\DetailesController;
+use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,14 +46,17 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
     Route::get('profile/edit/author', [UserAuthController::class , 'editAuhtorProfile'])->name('edit-profile-author');
     Route::get('index/author', [UserAuthController::class , 'indexAuthor'])->name('index-author');
     Route::get('create/article', [UserAuthController::class , 'createArticle'])->name('create-article');
+    Route::get('edit/password', [SettingController::class , 'editPassword'])->name('edit-password');
+    Route::post('update/password', [SettingController::class , 'updatePassword'])->name('update-password');
+
 
 
 });
 
 
 Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
-    Route::view('','cms.parent');
-    // Route::view('temp','cms.temp');
+    Route::view('','cms.home')->name('home');
+    Route::view('profile','cms.profile')->name('profile');
 
     Route::resource('countries',CountryController::class);
 
@@ -80,6 +89,28 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
 
 
     Route::resource('roles.permissions',RolePermissionController::class);
+
+    Route::resource('sliders',SliderController::class);
+    Route::post('update_sliders/{id}', [SliderController::class , 'update'])->name('update_sliders');
+
+
+    Route::get('contacts', [ContactController::class ,  'index'])->name('contacts.index');
+
+
+
+});
+
+Route::prefix('home/')->group(function(){
+
+    Route::get('', [HomeController::class ,  'indexSlider'])->name('news.index');
+    Route::get('news-detailes/{id}', [HomeController::class ,  'indexDetailes'])->name('news.detailes');
+    Route::get('contact',[HomeController::class ,'contact'])->name('news.contact');
+    Route::get('all-news/{id}',[HomeController::class ,'allNews'])->name('all-news');
+
+    Route::post('contacts', [ContactController::class ,  'store']);
+    Route::post('comments',[CommerntController::class ,'store']);
+
+
 
 
 

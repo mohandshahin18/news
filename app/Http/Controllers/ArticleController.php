@@ -12,7 +12,7 @@ class ArticleController extends Controller
 {
 
     public function indexArticle($id){
-        $articles = Article::where('author_id',$id)->with('category')->orderBy('id', 'desc')->Paginate(7);
+        $articles = Article::where('author_id',$id)->with('category')->orderBy('id', 'desc')->Paginate(12);
         $this->authorize('viewAny', Article::class);
 
         return response()->view('cms.article.index' , compact('articles','id'));
@@ -34,7 +34,7 @@ class ArticleController extends Controller
     public function index()
     {
 
-        $articles =Article::orderBy('id', 'desc')->with('author')->Paginate(7);
+        $articles =Article::orderBy('id', 'desc')->with('author')->Paginate(12);
         $this->authorize('viewAny', Article::class);
         return response()->view('cms.article.indexAll' , compact('articles'));
     }

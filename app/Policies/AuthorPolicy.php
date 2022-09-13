@@ -25,11 +25,11 @@ class AuthorPolicy
              ?  $this->allow()
              : $this->deny('You cannot access this page');
          }
-         elseif(auth('author')->check()){
-            return auth()->user()->hasPermissionTo('Index-Author')
-             ?  $this->allow()
-             : $this->deny(' You cannot access this page');
-         }
+        //  elseif(auth('author')->check()){
+        //     return auth()->user()->hasPermissionTo('Index-Author')
+        //      ?  $this->allow()
+        //      : $this->deny(' You cannot access this page');
+        //  }
 
 
         // return $admin->hasPermissionTo('Index-Author' ) ?

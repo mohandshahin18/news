@@ -168,10 +168,10 @@ class AuthorController extends Controller
 
             $authors->email= $request->get('email');
 
-            $isSaved = $authors->save();
+            $isUpdate = $authors->save();
 
 
-            if($isSaved){
+            if($isUpdate){
 
                 $users = $authors->user;
 
@@ -180,11 +180,12 @@ class AuthorController extends Controller
 
                     $imageName = time() . 'image.' . $image->getClientOriginalExtension();
 
-                    $image->move('storage/images/admin',$imageName);
+                    $image->move('storage/images/author',$imageName);
 
 
                     $users->image = $imageName;
                 }
+
 
                 $users->firstname= $request->get('firstname');
                 $users->lastname= $request->get('lastname');
@@ -197,8 +198,13 @@ class AuthorController extends Controller
 
                 $isSaved = $users->save();
 
+                if(Auth::guard('admin')->id()){
+                    return ['redirect' =>route('authors.index')];
 
-                return ['redirect' =>route('authors.index')];
+                }elseif(Auth::guard('author')->id()){
+                    return ['redirect' =>route('profile')];
+
+                }
 
                 return response()->json(['icon' => 'success','title'=>'Updated is Successfully'],200);
 

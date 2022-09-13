@@ -18,6 +18,11 @@ class Article extends Model
     }
 
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+
     // protected static function boot() {
     //     parent::boot();
 

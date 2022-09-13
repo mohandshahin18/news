@@ -49,7 +49,7 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
-                <th>ID</th>
+                {{-- <th>ID</th> --}}
                 <th>Name</th>
                 <th>Email</th>
                 <th>Mobile</th>
@@ -72,7 +72,7 @@
                 @foreach($authors as $author)
                 @if(Auth::guard('author')->id()==$author->id)
                     <tr>
-                        <td>{{ $author->id }}</td>
+                        {{-- <td>{{ $author->id }}</td> --}}
                         <td>{{ $author->user ? $author->user->firstname . " " . $author->user->lastname : "Not Found"  }}</td>
                         {{-- <td>{{ $author->user ? $author->user->lastname : "Not Found"}}</td> --}}
                         <td>{{ $author->email }}</td>

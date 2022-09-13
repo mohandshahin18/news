@@ -47,17 +47,6 @@
 
             </div>
 
-            {{-- <div class="form-group col-md-4">
-                <label for="role_id">Role Name</label>
-                <select class="form-control select2 select2-hidden-accessible" name="role_id" id="role_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                    @foreach ($roles as $role )
-                        <option  value="{{ $role->id }}" >{{ $role->name }}</option>
-                    @endforeach
-
-
-                </select>
-
-            </div> --}}
 
 
 
