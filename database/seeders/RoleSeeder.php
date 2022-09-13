@@ -16,10 +16,11 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        // Role::create(['name' => 'Super Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
-        // Role::create(['name' => 'Sub Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+        Role::create(['name' => 'Super Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+        Role::create(['name' => 'Sub Admin', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+        Role::create(['name' => 'Author', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
 
-        // Role::create(['name' => 'Super Author' , 'guard_name' => 'author' , 'created_at' => now() , 'updated_at' => now()]);
+        Role::create(['name' => 'Super Author' , 'guard_name' => 'author' , 'created_at' => now() , 'updated_at' => now()]);
         //PERMISSIONS - ADMIN AUTH
         Permission::create(['name' => 'Create-Role', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
         Permission::create(['name' => 'Index-Role', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
@@ -56,5 +57,41 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Edit-Category', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
         Permission::create(['name' => 'Delete-Category', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
 
+        Permission::create(['name' => 'Create-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Index-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Edit-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Delete-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+
+        Permission::create(['name' => 'Create-Role', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Index-Role', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Edit-Role', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Delete-Role', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
+        Permission::create(['name' => 'Create-Permission', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Index-Permission', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Edit-Permission', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Delete-Permission', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
+
+
+        Permission::create(['name' => 'Create-Author', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Index-Author', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Edit-Author', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Delete-Author', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
+        Permission::create(['name' => 'Create-Country', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Index-Country', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Edit-Country', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Delete-Country', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
+        Permission::create(['name' => 'Create-City', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Index-City', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Edit-City', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Delete-City', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
+        Permission::create(['name' => 'Create-Category', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Index-Category', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Edit-Category', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'Delete-Category', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
     }
 }

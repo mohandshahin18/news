@@ -19,7 +19,7 @@ class category extends Model
     }
 
     public function articles(){
-        return $this->hasMany(Article::class)->take(9)->orderBy('id','desc');
+        return $this->hasMany(Article::class)->take(3)->orderBy('id','desc');
     }
 
 
