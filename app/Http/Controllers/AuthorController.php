@@ -156,8 +156,8 @@ class AuthorController extends Controller
         $validator = validator($request->all(),[
             'firstname' =>'required|string|min:3|max:30',
             'lastname' =>'required|string|min:3|max:30',
-            // 'mobile' =>'required|string|min:10|max:14',
-            // 'image' => 'image|mimes:png,jpg,jpeg,JPG',
+            'mobile' =>'required|string|min:10|max:14',
+            // 'image' => 'image|',
 
         ],[
 
@@ -174,6 +174,7 @@ class AuthorController extends Controller
             if($isUpdate){
 
                 $users = $authors->user;
+
 
                 if(request()->hasFile('image')){
                     $image = $request->file('image');

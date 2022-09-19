@@ -154,7 +154,6 @@
             formData.append('gender',document.getElementById('gender').value);
             formData.append('status',document.getElementById('status').value);
             formData.append('email',document.getElementById('email').value);
-            // formData.append('password',document.getElementById('password').value);
             formData.append('date_of_birth',document.getElementById('date_of_birth').value);
             formData.append('image',document.getElementById('image').files[0]);
             formData.append('file',document.getElementById('file').files[0]);

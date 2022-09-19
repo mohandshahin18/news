@@ -67,6 +67,12 @@
                 <textarea class="form-control" rows="3"  name="full_description" id="full_description"  placeholder="Enter Full Description of Article"></textarea>
               </div>
 
+              <div class="form-group ">
+                <label for="image">Image</label>
+                <input type="file" class="form-control" name="image" id="image" placeholder="Enter image of Article">
+              </div>
+
+
 
           </div>
           <!-- /.card-body -->
@@ -93,6 +99,8 @@
             formData.append('full_description',document.getElementById('full_description').value);
             formData.append('category_id',document.getElementById('category_id').value);
             formData.append('author_id',document.getElementById('author_id').value);
+            formData.append('image',document.getElementById('image').files[0]);
+
 
             store('/cms/admin/articles' , formData);
         }

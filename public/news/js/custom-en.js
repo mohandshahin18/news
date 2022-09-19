@@ -13,9 +13,9 @@ $(document).ready(function(){
       nav:true,
       dots:false,
       autoplay : true ,
-      autoplaySpeed : 1000 ,
-      smartSpeed : 800 ,
-      autoplayTimeout : 3000 ,
+      autoplaySpeed : 2500 ,
+      smartSpeed : 1200 ,
+      autoplayTimeout : 3500 ,
       autoplayHoverPause : true ,
       responsive:{
           0:{

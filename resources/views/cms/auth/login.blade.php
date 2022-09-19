@@ -69,10 +69,19 @@
 
       <p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
+        {{-- <a href="forgot-password.html">Are you Admin ? click here</a> --}}
       </p>
-      {{-- <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p> --}}
+      @if($guard == 'author')
+      <p class="mb-1">
+        <a href="{{ route('admin-login') }}">Are you Admin ? click here</a>
+      </p>
+      @else
+      <p class="mb-1">
+        <a href="{{ route('auhtor-login') }}">Are you Author ? click here</a>
+      </p>
+      @endif
+
+
     </div>
     <!-- /.login-card-body -->
   </div>

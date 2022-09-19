@@ -60,8 +60,8 @@
 
                     <tr>
                         <td>{{ $article->id }}</td>
-                        <td>{{ $article->title ?  $article->title : "Not Found"}}</td>
-                        <td >{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
+                        <td style="max-width: 270px; overflow: hidden;">{{ $article->title ?  $article->title : "Not Found"}}</td>
+                        <td style="max-width: 270px; overflow: hidden;">{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
                         <td >{{ $article->category ? $article->category->name  : "Not Found"}}</td>
                         <td >{{ $article->author ?  $article->author->user->firstname . " " . $article->author->user->lastname : "Not Found"}}</td>
 

@@ -61,7 +61,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validator = validator($request->all(),[
-            'title' =>'required|string|min:3|max:30',
+            'title' =>'required|string|min:3|max:200',
         ],[
 
         ]);
@@ -73,10 +73,23 @@ class ArticleController extends Controller
             $articles->full_description= $request->get('full_description');
             $articles->category_id= $request->get('category_id');
             $articles->author_id= $request->get('author_id');
+            if(request()->hasFile('image')){
+                $image = $request->file('image');
+
+                $imageName = time() . 'image.' . $image->getClientOriginalExtension();
+
+                $image->move('storage/images/article',$imageName);
+
+
+                $articles->image = $imageName;
+            }
+
+
 
             $isSaved = $articles->save();
 
             if($isSaved){
+
                 return response()->json(['icon' => 'success','title'=>'Created is Successfully'],200);
             } else{
                 return response()->json(['icon' => 'error','title'=>'Created is Failed'],400);
@@ -138,6 +151,19 @@ class ArticleController extends Controller
             $articles->full_description= $request->get('full_description');
             $articles->category_id= $request->get('category_id');
             $articles->author_id= $request->get('author_id');
+
+            if(request()->hasFile('image')){
+                $image = $request->file('image');
+
+                $imageName = time() . 'image.' . $image->getClientOriginalExtension();
+
+                $image->move('storage/images/article',$imageName);
+
+
+                $articles->image = $imageName;
+            }
+
+
 
             $isSaved = $articles->save();
             return ['redirect' =>route('indexArticle',$articles->author_id)];

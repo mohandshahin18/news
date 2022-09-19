@@ -10,7 +10,7 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">Contact
-        <small>Subheading</small>
+        {{-- <small>Subheading</small> --}}
       </h1>
 
       <ol class="breadcrumb">

@@ -17,12 +17,25 @@ class HomeController extends Controller
     public function indexSlider()
     {
 
-        $categories = category::with('articles')->limit(3)->get();
+        $categories = category::take(3)->get();
+        // $categories = category::whereHas('articles', function($query){
+        //     return $query->orderBy('created_at', 'desc')->limit(3);
+        // })->get();
+
         $sliders = Slider::all();
         $articles = Article::orderBy('created_at', 'desc')->take(3)->get();
 
         return response()->view('news.index', compact('sliders','categories','articles'));
 
+    }
+
+
+
+    public function allNews(){
+        $categories = category::get();
+        $articles = Article::orderBy('created_at', 'desc')->Paginate(10);
+
+        return response()->view('news.all-news' ,compact('categories','articles'));
     }
 
 
@@ -33,13 +46,6 @@ class HomeController extends Controller
 
 
 
-
-    public function allNews($id){
-        $categories = category::with('articles')->findOrFail($id);
-        $articles = Article::orderBy('created_at', 'desc')->simplePaginate(7);
-
-        return response()->view('news.all-news' ,compact('categories','id','articles'));
-    }
 
 
 

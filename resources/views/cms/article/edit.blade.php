@@ -64,7 +64,14 @@
                 <textarea class="form-control" rows="3"  name="full_description" id="full_description"  value=""  placeholder="Enter Description of Article "> {{ $articles->full_description}}</textarea>
             </div>
 
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" class="form-control" value="{{ $articles->image }}" name="image" id="image"  placeholder="Enter image of Article">
+              </div>
+
         </div>
+
+
 
 
 
@@ -91,6 +98,8 @@
         formData.append('category_id',document.getElementById('category_id').value);
         // formData.append('role_id',document.getElementById('category_id').value);
             formData.append('author_id',document.getElementById('author_id').value);
+            formData.append('image',document.getElementById('image').files[0]);
+
 
         storeRoute('/cms/admin/update_articles/'+id , formData);
     }

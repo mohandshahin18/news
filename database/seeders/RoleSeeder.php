@@ -60,6 +60,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Index-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
         Permission::create(['name' => 'Edit-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
         Permission::create(['name' => 'Delete-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'All-Article', 'guard_name' => 'admin', 'created_at' => now(), 'updated_at' => now()]);
 
 
 
@@ -102,5 +103,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Index-Article', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
         Permission::create(['name' => 'Edit-Article', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
         Permission::create(['name' => 'Delete-Article', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+        Permission::create(['name' => 'All-Article', 'guard_name' => 'author', 'created_at' => now(), 'updated_at' => now()]);
+
     }
 }

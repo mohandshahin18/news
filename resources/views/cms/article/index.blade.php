@@ -56,10 +56,12 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
-                <th>ID</th>
+                {{-- <th>ID</th> --}}
                 <th>Title</th>
                 <th>Short Description</th>
                 <th>Category</th>
+                <th>Image</th>
+
                 @canAny(['Edit-Article' , 'Delete-Article' ])
                 <th>Settings</th>
                 @endcanAny
@@ -70,10 +72,14 @@
                 @foreach($articles as $article)
 
                     <tr>
-                        <td>{{ $article->id }}</td>
-                        <td style="width: 100px">{{ $article->title ?  $article->title : "Not Found"}}</td>
-                        <td  style="width: 100px">{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
+                        {{-- <td>{{ $article->id }}</td> --}}
+                        <td style="max-width: 270px; overflow: hidden;">{{ $article->title ?  $article->title : "Not Found"}}</td>
+                        <td  style="max-width: 270px; overflow: hidden;">{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
                         <td>{{ $article->category->name ?$article->category->name  : "Not Found"}}</td>
+                        <td>
+                            <img class="img-circle img-bordered-sm" src="{{ asset('storage/images/article/'.$article->image) }}" width="50" height="50" alt="User Image">
+
+                        </td>
                         @canAny(['Edit-Article' , 'Delete-Article' ])
                         <td>
                             <div style="display: flex; gap: 5px;">

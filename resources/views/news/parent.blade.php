@@ -36,12 +36,12 @@
 
 <body>
 
-    @php
+    {{-- @php
     use App\Models\category;
     $categories = category::limit(3)->get();
 
 
-    @endphp
+    @endphp --}}
 
 
 <!-- Navigation -->
@@ -58,15 +58,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('news.index') }}">home</a>
                 </li>
-                @foreach ( $categories as $category )
+                {{-- @foreach ( $categories as $category )
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('all-news',$category->id) }}">{{ $category->name }}</a>
                 </li>
-                @endforeach
+                @endforeach --}}
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('all-news') }}">All News</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('news.contact') }}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Login</a>
                 </li>
 
             </ul>
@@ -79,7 +87,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Momen Sisalem 2018</p>
+        <p class="m-0 text-center text-white">Copyright &copy; {{ now()->year }} - {{ now()->year +1 }}   All rights reserved.</p>
     </div>
     <!-- /.container -->
 </footer>

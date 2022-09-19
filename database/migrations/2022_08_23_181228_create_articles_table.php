@@ -18,6 +18,8 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('short_description');
             $table->text('full_description')->nullable();
+            $table->string('image')->nullable();
+
             $table->foreignId('author_id');
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
             $table->foreignId('category_id');

@@ -59,7 +59,7 @@
             @foreach($articles as $article)
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
-                    <h4 class="card-header">{{$article->title}}</h4>
+                    <h4 class="card-header" style="height: 74px; overflow: hidden; ">{{$article->title}}</h4>
                     <div class="card-body">
                         <p class="card-text">{{$article->short_description}}</p>
                     </div>
@@ -80,7 +80,6 @@
 
 <section class="gray-sec">
     <div class="container">
-        <!-- category Section -->
         <h3 class="my-4">{{ $category->name }}</h3>
 
 
@@ -91,12 +90,12 @@
             @if($article->category_id == $category->id)
             <div class="col-lg-4 col-sm-6 portfolio-item">
                 <div class="card h-100">
-                    <a href="{{ route('news.detailes',$article->id) }}"><img class="card-img-top" src="{{ asset('news/img/1.jpg') }}" alt=""></a>
+                    <a href="{{ route('news.detailes',$article->id) }}"><img class="card-img-top" src="{{ asset('storage/images/article/'. $article->image) }}" alt=""></a>
                     <div class="card-body">
 
 
-                        <h4 class="card-title"><a href="{{ route('news.detailes',$article->id) }}">{{$article->title}}</a></h4>
-                        <p class="card-text">{{$article->short_description}}</p>
+                        <h4 class="card-title title"><a href="{{ route('news.detailes',$article->id) }}">{{$article->title}}</a></h4>
+                        <p class="card-text description" >{{$article->short_description}}</p>
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('news.detailes',$article->id) }}" class="btn btn-primary">Learn More</a>
@@ -109,11 +108,12 @@
         </div>
 
 
-        <div align="center"><a class="btn btn-success" href="{{ route('all-news',$category->id) }}">more news</a></div>
+        <div align="center"><a class="btn btn-success" href="{{ route('all-news') }}">more news</a></div>
     </div>
 </section>
 
 @endforeach
+
 
 
 
@@ -157,7 +157,7 @@
                     beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
             </div>
             <div class="col-md-4">
-                <a class="btn btn-lg btn-secondary btn-block" href="#">contact us</a>
+                <a class="btn btn-lg btn-secondary btn-block" href="{{ route('news.contact') }}">contact us</a>
             </div>
         </div>
     </div>

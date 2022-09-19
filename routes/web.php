@@ -37,7 +37,9 @@ Route::get('/', function () {
 // for login
 Route::prefix('cms/')->middleware('guest:admin,author')->group(function(){
     Route::get('{guard}/login', [UserAuthController::class , 'showlogin'])->name('login.view');
-    Route::post('{guard}/login', [UserAuthController::class , 'login']);
+    // Route::post('{guard}/login', [UserAuthController::class , 'login']);
+    Route::post('admin/login', [UserAuthController::class , 'adminLogin'])->name('admin-login');
+    Route::post('author/login', [UserAuthController::class , 'authorLogin'])->name('auhtor-login');
 });
 
 Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
@@ -105,7 +107,7 @@ Route::prefix('home/')->group(function(){
     Route::get('', [HomeController::class ,  'indexSlider'])->name('news.index');
     Route::get('news-detailes/{id}', [HomeController::class ,  'indexDetailes'])->name('news.detailes');
     Route::get('contact',[HomeController::class ,'contact'])->name('news.contact');
-    Route::get('all-news/{id}',[HomeController::class ,'allNews'])->name('all-news');
+    Route::get('all-news',[HomeController::class ,'allNews'])->name('all-news');
 
     Route::post('contacts', [ContactController::class ,  'store']);
     Route::post('comments',[CommerntController::class ,'store']);

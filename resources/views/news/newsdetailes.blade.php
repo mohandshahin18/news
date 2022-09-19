@@ -13,8 +13,11 @@
       @if($articles->category_id == $category->id )
 
       <h1 class="mt-4 mb-3">{{ $category->name }}</h1>
+
       @endif
       @endforeach
+
+
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -29,7 +32,7 @@
         <div class="col-lg-8">
 
           <!-- Preview Image -->
-          <img class="img-fluid rounded" src="{{ asset('news/img/1.jpg') }}" alt="">
+          <img class="img-fluid rounded" src="{{ asset('storage/images/article/'. $articles->image) }}" style="display: block; margin: auto;" alt="">
 
           <hr>
 
@@ -66,11 +69,9 @@
             </div>
           </div>
 
-          {{-- @foreach ($comments as $comment ) --}}
-          {{-- @endforeach --}}
 
 
-          {{-- @foreach ($articles as $article ) --}}
+
           @foreach ($comments as $comment )
           @if($comment->article_id == $articles->id )
                 <!-- Single Comment -->
@@ -84,12 +85,44 @@
           @endif
 
           @endforeach
-          {{-- @endforeach --}}
 
 
 
 
         </div>
+
+        @foreach ($categories as $category )
+        @if($articles->category_id == $category->id )
+
+        <div class="col-md-4">
+            @foreach($category->articles as $article )
+
+            <!-- Side Widget -->
+            <div class="card my-4 ">
+                <a href="{{ route('news.detailes',$article->id) }}">
+                    <h5 class="card-header title-same">{{$article->title}}</h5>
+                </a>
+                <div class="card-body same-news" style="">
+                    <a href="{{ route('news.detailes',$article->id) }}"><img class="img-card"  src="{{ asset('storage/images/article/'. $article->image) }}" alt=""></a>
+                 <a href="{{ route('news.detailes',$article->id) }}"><p > {{$article->short_description}}</p></a>
+                </div>
+              </div>
+
+            @endforeach
+
+          </div>
+
+
+        @endif
+        @endforeach
+
+
+
+
+
+
+
+
 
       </div>
       <!-- /.row -->

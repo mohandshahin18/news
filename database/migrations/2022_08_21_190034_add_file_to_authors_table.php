@@ -14,7 +14,7 @@ class AddFileToAuthorsTable extends Migration
     public function up()
     {
         Schema::table('authors', function (Blueprint $table) {
-            $table->string('file');
+            $table->string('file')->nullable();
         });
     }
 

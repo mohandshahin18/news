@@ -91,3 +91,61 @@ h3.my-4 {
   background-color: #e64c3c;
   border-color: #e64c3c;
 }
+
+.same-news{
+    display: flex;
+     /* align-items: center; */
+      justify-content: center;
+       /* gap: 18px; */
+        padding: unset;
+         height: 110px;
+          overflow: hidden;
+}
+
+.same-news a .img-card{
+    width: 180px;
+    height: 110px;
+    margin-left: -12px;
+
+}
+.same-news p
+{
+    padding: 10px ;
+    color: #000;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.same-news a:hover
+{
+    text-decoration: none !important;
+}
+.same-news a:hover p
+{
+    color: #0056b3;
+}
+
+
+.title-same{
+    max-height: 80px;
+    overflow: hidden;
+    font-size: 17px;
+    padding: 10px;
+}
+
+
+.title{
+    height: 60px;
+    overflow: hidden;
+}
+.title a{
+   font-size: 19px;
+}
+.description {
+    height: 73px;
+    overflow: hidden;
+}

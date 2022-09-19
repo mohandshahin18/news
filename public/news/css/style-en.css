@@ -119,11 +119,11 @@ html {
 
 .similar-divice .owl-prev{
     right: unset;
-    left: -12px;
+    left: -25px;
 }
 .similar-divice  .owl-next {
     left: unset;
-    right: -12px;
+    right: -25px;
 }
 
 @media (max-width: 767px){

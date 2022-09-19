@@ -21,12 +21,12 @@ class UserAuthController extends Controller
     }
 
 
-    // login
-    public function login(Request $request){
+    // login admin
+    public function adminLogin(Request $request){
 
         $validator = validator($request->all(),[
-            'email'=> 'required|email|string', //|exists:admins,email
-            'password'=>'required|string|min:3', //|in:admins,password
+            'email'=> 'required|email|string|exists:admins,email', //|exists:admins,email
+            'password'=>'required|string|min:3|in:admins,password', //|in:admins,password
         ],[
 
         ]);
@@ -42,7 +42,37 @@ class UserAuthController extends Controller
             if(Auth::guard($request->get('guard'))->attempt($credintial)){
                 return response()->json(['icon'=>'success' , 'title' => 'Login Successfully'], 200);
             }else{
-                return response()->json(['icon'=>'error' , 'title' => 'Login Failed'], 400);
+                return response()->json(['icon'=>'error' , 'title' => 'Wrong in email or password'], 400);
+
+            }
+        }else{
+            return response()->json(['icon'=>'error' , 'title'=> $validator->getMessageBag()->first()],400);
+        }
+    }
+
+
+    // login author
+    public function authorLogin(Request $request){
+
+        $validator = validator($request->all(),[
+            'email'=> 'required|email|string|exists:authors,email', //|exists:admins,email
+            'password'=>'required|string|min:3|in:authors,password', //|in:admins,password
+        ],[
+
+        ]);
+
+        $credintial = [
+            'email' => $request->get('email'),
+            'password' => $request->get('password'),
+
+
+        ];
+        if(! $validator->fails()){
+
+            if(Auth::guard($request->get('guard'))->attempt($credintial)){
+                return response()->json(['icon'=>'success' , 'title' => 'Login Successfully'], 200);
+            }else{
+                return response()->json(['icon'=>'error' , 'title' => 'Wrong in email or password'], 400);
 
             }
         }else{
@@ -58,6 +88,7 @@ class UserAuthController extends Controller
         Auth::guard($guard)->logout();
         $request->session()->invalidate();
         return redirect()->route('login.view' , $guard);
+        // return redirect()->route('news.index');
     }
 
 

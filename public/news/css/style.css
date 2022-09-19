@@ -21,7 +21,7 @@
     overflow: hidden;
     box-shadow: 0 5px 20px #fff4f4;
     position: relative;
-    height: 480px;
+    height: 470px;
     position: relative;
     margin-bottom: 50px;
 
@@ -59,7 +59,7 @@ transition: all 0.7s ease-in-out;
 }
 .similar-divice .box .content a h4{
     color: #007bff;
-    height: 50px;
+    height: 65px;
     transition: all 0.6s ease-in-out;
     -webkit-transition: all 0.6s ease-in-out;
     -moz-transition: all 0.6s ease-in-out;
@@ -67,7 +67,7 @@ transition: all 0.7s ease-in-out;
     -o-transition: all 0.6s ease-in-out;
     line-height: 31px;
     font-size: 25px;
-    /* overflow: hidden; */
+    overflow: hidden;
 
 }
 .similar-divice .box .content a h4:hover{
@@ -100,7 +100,7 @@ transition: all 0.7s ease-in-out;
 
 }
 
-.similar-divice .box .content a p{
+.similar-divice .box .content  p{
     color: #000;
     /* display: flex; */
     /* gap: 5px; */
@@ -108,7 +108,8 @@ transition: all 0.7s ease-in-out;
     /* align-items: center; */
     font-size: 15px;
     line-height: 34px;
-    height: 90px;
+    height: 65px;
+    overflow: hidden;
 }
 .similar-divice .box .content a p span{
     font-weight: normal;
@@ -128,7 +129,7 @@ transition: all 0.7s ease-in-out;
 .similar-divice .owl-prev {
     font-size: 20px !important;
     position: absolute;
-    top: 260px;
+    top: 200px;
     right: -12px;
     color: #717171 !important;
 
@@ -143,7 +144,7 @@ transition: all 0.7s ease-in-out;
 .similar-divice .owl-next {
     font-size: 20px !important;
     position: absolute;
-    top: 260px;
+    top: 200px;
     left: -12px;
     color: #717171 !important;
 
@@ -195,14 +196,14 @@ transition: all 0.7s ease-in-out;
 
 .similar-divice .owl-carousel .owl-nav button.owl-next:hover,
 .similar-divice .owl-carousel .owl-nav button.owl-prev:hover {
-    background-color: #c70000;
+    background-color: #007bff;
     padding: 0px 10px !important;
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
-    border: 1px solid #c70000;
+    border: 1px solid #007bff;
 }
 
 @media(max-width:767px){

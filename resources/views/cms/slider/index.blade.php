@@ -69,8 +69,8 @@
                             <img class="img-circle img-bordered-sm" src="{{ asset('storage/images/slider/'.$slider->image) }}" width="50" height="50" alt="User Image">
 
                         </td>
-                        <td>{{ $slider->title }}</td>
-                        <td>{{ $slider->description }}</td>
+                        <td style="max-width: 270px; overflow: hidden;">{{ $slider->title }}</td>
+                        <td style="max-width: 270px; overflow: hidden;">{{ $slider->description }}</td>
                         {{-- @canAny(['Edit-City','Delete-City']) --}}
                         <td>
                             <div style="display: flex; gap: 5px;">
