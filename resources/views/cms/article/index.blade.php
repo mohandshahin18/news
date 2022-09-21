@@ -77,7 +77,7 @@
                         <td  style="max-width: 270px; overflow: hidden;">{{ $article->short_description ? $article->short_description  : "Not Found"}}</td>
                         <td>{{ $article->category->name ?$article->category->name  : "Not Found"}}</td>
                         <td>
-                            <img class="img-circle img-bordered-sm" src="{{ asset('storage/images/article/'.$article->image) }}" width="50" height="50" alt="User Image">
+                            <img class=" img-bordered-sm" src="{{ asset('storage/images/article/'.$article->image) }}" width="50" height="50" alt="User Image">
 
                         </td>
                         @canAny(['Edit-Article' , 'Delete-Article' ])

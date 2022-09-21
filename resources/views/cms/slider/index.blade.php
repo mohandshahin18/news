@@ -66,7 +66,7 @@
                     <tr>
                         <td>{{ $slider->id }}</td>
                         <td>
-                            <img class="img-circle img-bordered-sm" src="{{ asset('storage/images/slider/'.$slider->image) }}" width="50" height="50" alt="User Image">
+                            <img class="img-bordered-sm" src="{{ asset('storage/images/slider/'.$slider->image) }}" width="50" height="50" alt="User Image">
 
                         </td>
                         <td style="max-width: 270px; overflow: hidden;">{{ $slider->title }}</td>

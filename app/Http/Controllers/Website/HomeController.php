@@ -55,8 +55,10 @@ class HomeController extends Controller
         $categories = category::all();
         $articles = Article::with('comments')->findOrFail($id);
         $comments = Comment::all();
+        $Allarticles = Article::where('id', '!=', $id  )->inRandomOrder()->take(3)->get();
 
-        return response()->view('news.newsdetailes',compact('articles' , 'id','categories','comments'));
+
+        return response()->view('news.newsdetailes',compact('articles' , 'id','categories','comments','Allarticles'));
 
 
     }

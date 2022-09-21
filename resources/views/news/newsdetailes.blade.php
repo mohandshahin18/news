@@ -91,11 +91,11 @@
 
         </div>
 
-        @foreach ($categories as $category )
-        @if($articles->category_id == $category->id )
+        {{-- @foreach ($categories as $category )
+        @if($articles->category_id == $category->id ) --}}
 
         <div class="col-md-4">
-            @foreach($category->articles as $article )
+            @foreach($Allarticles as $article )
 
             <!-- Side Widget -->
             <div class="card my-4 ">
@@ -112,9 +112,9 @@
 
           </div>
 
-
+{{--
         @endif
-        @endforeach
+        @endforeach --}}
 
 
 
