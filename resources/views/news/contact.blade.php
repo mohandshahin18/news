@@ -29,24 +29,60 @@
           <h3>Send us a Message</h3>
           <form name="sentMessage" id="contactForm" novalidate>
             <div class="control-group form-group">
-              <div class="controls">
-                <label for="name">Full Name:</label>
-                <input type="text" class="form-control" name="name" id="name" required data-validation-required-message="Please enter your name.">
-                <p class="help-block"></p>
-              </div>
-            </div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label for="mobile">Phone Number:</label>
-                <input type="tel" class="form-control" id="mobile" name="mobile" required data-validation-required-message="Please enter your phone number.">
-              </div>
-            </div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label for="email">Email Address:</label>
-                <input type="email" class="form-control" name="email" id="email" required data-validation-required-message="Please enter your email address.">
-              </div>
-            </div>
+                @if (Auth::guard('visitor')->id())
+                <div class="controls">
+                    {{-- <label for="name">Full Name:</label> --}}
+                    <input type="text" class="form-control" name="name" id="name" value="{{ auth('visitor')->user()->full_name  }}" required data-validation-required-message="Please enter your name." readonly hidden>
+                    <p class="help-block"></p>
+                  </div>
+                </div>
+
+                @foreach($visitors as $visitor)
+                        @if (Auth::guard('visitor')->id() == $visitor->id)
+
+                <div class="control-group form-group">
+                  <div class="controls">
+                    {{-- <label for="mobile">Phone Number:</label> --}}
+                    <input type="tel" class="form-control" id="mobile" name="mobile" value="{{ $visitor->mobile  }}"     required data-validation-required-message="Please enter your phone number." readonly hidden>
+                  </div>
+                </div>
+
+
+                <div class="control-group form-group">
+                  <div class="controls">
+                    {{-- <label for="email">Email Address:</label> --}}
+                    <input type="email" class="form-control" name="email" id="email" value="{{ $visitor->email  }}" required data-validation-required-message="Please enter your email address." readonly hidden>
+                  </div>
+                </div>
+
+                @endif
+                @endforeach
+                @else
+                <div class="controls">
+                    <label for="name">Full Name:</label>
+                    <input type="text" class="form-control" name="name" id="name"  required data-validation-required-message="Please enter your name." >
+                    <p class="help-block"></p>
+                  </div>
+                </div>
+
+
+
+                <div class="control-group form-group">
+                  <div class="controls">
+                    <label for="mobile">Phone Number:</label>
+                    <input type="tel" class="form-control" id="mobile" name="mobile"      required data-validation-required-message="Please enter your phone number.">
+                  </div>
+                </div>
+
+
+                <div class="control-group form-group">
+                  <div class="controls">
+                    <label for="email">Email Address:</label>
+                    <input type="email" class="form-control" name="email" id="email"  required data-validation-required-message="Please enter your email address.">
+                  </div>
+                </div>
+                @endif
+
             <div class="control-group form-group">
               <div class="controls">
                 <label for="message">Message:</label>

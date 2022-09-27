@@ -4,6 +4,8 @@
 @section('title' , 'Index Message')
 
 @section('styles')
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 @endsection
 
@@ -31,14 +33,10 @@
 
 
           <div class="card-tools">
-            <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-default">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
+            <div class="" style="width: 250px;">
+                <form action="" method="POST">
+                    <input type="text" class="form-control"   placeholder="Search by name" id="search">
+                </form>
             </div>
           </div>
         </div>
@@ -80,7 +78,7 @@
         <!-- /.card-body -->
       </div>
       <div style="display: flex; align-items: center; justify-content: center;">
-        {{ $contacts->links() }}
+        {{-- {{ $contacts->links() }} --}}
     </div>
       <!-- /.card -->
     </div>
@@ -91,6 +89,44 @@
 
 
 @section('scripts')
-
+<script>
+    $('#search').on('keyup', function(){
+        search();
+    });
+    search();
+    function search(){
+         var keyword = $('#search').val();
+         $.post('{{ route("contact.search") }}',
+          {
+             _token: $('meta[name="csrf-token"]').attr('content'),
+             keyword:keyword
+           },
+           function(data){
+            table_post_row(data);
+              console.log(data);
+           });
+    }
+    // table row with ajax
+    function table_post_row(res){
+    let htmlView = '';
+    if(res.contacts.length <= 0){
+        htmlView+= `
+           <tr>
+              <td colspan="12" style="text-align: center;">No data.</td>
+          </tr>`;
+    }
+    for(let i = 0; i < res.contacts.length; i++){
+        htmlView += `
+            <tr>
+                  <td>`+res.contacts[i].id+`</td>
+                  <td>`+res.contacts[i].name+`</td>
+                   <td>`+res.contacts[i].mobile+`</td>
+                   <td>`+res.contacts[i].email+`</td>
+                   <td style="max-width: 340px; overflow: scroll;">`+res.contacts[i].message+`</td>
+            </tr>`;
+    }
+         $('tbody').html(htmlView);
+    }
+    </script>
 @endsection
 

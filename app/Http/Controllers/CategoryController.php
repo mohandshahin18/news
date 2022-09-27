@@ -22,6 +22,20 @@ class CategoryController extends Controller
 
     }
 
+
+
+    public function showCategory(Request $request)
+    {
+       $categories = Category::orderBy('id', 'desc')->get();
+       if($request->keyword != ''){
+       $categories = Category::where('name','LIKE','%'.$request->keyword.'%')->get();
+       }
+       return response()->json([
+          'categories' => $categories
+       ]);
+     }
+
+
     /**
      * Show the form for creating a new resource.
      *

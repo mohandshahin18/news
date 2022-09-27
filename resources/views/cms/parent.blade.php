@@ -32,6 +32,7 @@
   {{-- <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"> --}}
   <link rel="stylesheet" href="{{ asset('cms/plugins/toastr/toastr.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="stylesheet" href="{{ asset('news/css/style.css') }}">
 
   @yield('styles')
 </head>
@@ -209,18 +210,26 @@
 
           @if (Auth::guard('admin')->id())
           @if (auth('admin')->user()->image !='')
-          <img class="brand-image img-circle elevation-3" src="{{ asset('storage/images/admin/' . auth('admin')->user()->image) }}"alt="User Image">
+          {{-- <img class="brand-image img-circle elevation-3" src="{{ asset('storage/images/admin/' . auth('admin')->user()->image) }}"alt="User Image"> --}}
+          <div class="img-visitor-logo-cms" style="background-image: url({{ asset('storage/images/admin/'.Auth::user()->image) }})"></div>
+
           @else
-          <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image">
+          {{-- <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image"> --}}
+          <div class="img-visitor-logo-cms" style="background-image: url({{ asset('cms/dist/img/user1.svg') }})"></div>
+
           @endif
        @endif
 
 
        @if (Auth::guard('author')->id())
         @if (auth('author')->user()->image !='')
-        <img class="brand-image img-circle elevation-3 " src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image">
+        {{-- <img class="brand-image img-circle elevation-3 " src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image"> --}}
+        <div class="img-visitor-logo-cms" style="background-image: url({{ asset('storage/images/author/'.Auth::user()->image) }})"></div>
+
         @else
-        <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image">
+        {{-- <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image"> --}}
+        <div class="img-visitor-logo-cms" style="background-image: url({{ asset('cms/dist/img/user1.svg') }})"></div>
+
         @endif
         @endif
         </div>
@@ -739,7 +748,11 @@
 <script src="{{ asset('cms/js/crud.js') }}"></script>
 <script src="{{ asset('cms/plugins/toastr/toastr.min.js') }}"></script>
 
+<!-- my file js and jquery  -->
+<script src="{{ asset('news/js/custom-en.js') }}"></script>
 
+{{-- /////////// --}}
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
 @yield('scripts')

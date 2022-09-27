@@ -26,25 +26,42 @@
                 <div class="text-center">
                     @if (Auth::guard('admin')->id())
                     @if (auth('admin')->user()->image !='')
-                  <a href="#" data-toggle="modal" data-target="#image">  <img class="profile-user-img img-fluid img-circle" src="{{ asset('storage/images/admin/' . auth('admin')->user()->image) }}"alt="User Image"></a>
-                    @else
-                    <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image"  style="width: 100px;">
+                  {{-- <a href="#" data-toggle="modal" data-target="#image">  <img class="profile-user-img img-fluid img-circle" src="{{ asset('storage/images/admin/' . auth('admin')->user()->image) }}"alt="User Image"></a> --}}
+                  <div class="kt-avatar kt-avatar--outline kt-avatar--circle" id="kt_user_avatar_3">
+                    <div  class="kt-avatar__holder" data-toggle="modal" data-target="#image" style="background-image: url({{ asset('storage/images/admin/'.Auth::user()->image) }}); cursor:pointer"></div>
+                    </div>
+                  @else
+                    {{-- <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image"  style="width: 100px;"> --}}
+                    <div class="kt-avatar kt-avatar--outline kt-avatar--circle" id="kt_user_avatar_3">
+                        <div  class="kt-avatar__holder"  style="background-image: url({{ asset('cms/dist/img/user1.svg') }}); cursor:pointer"></div>
+                    </div>
                     @endif
                     @endif
 
 
                      @if (Auth::guard('author')->id())
                     @if (auth('author')->user()->image !='')
-                    <a href="# data-toggle="modal" data-target="#image""><img class="profile-user-img img-fluid img-circle" src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image"></a>
+                    <div class="kt-avatar kt-avatar--outline kt-avatar--circle" id="kt_user_avatar_3">
+                        <div  class="kt-avatar__holder" data-toggle="modal" data-target="#image" style="background-image: url({{ asset('storage/images/author/'.Auth::user()->image) }}); cursor:pointer"></div>
+                        </div>
+                    {{-- <a href="# data-toggle="modal" data-target="#image""><img class="profile-user-img img-fluid img-circle" src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image"></a> --}}
                     @else
-                    <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image" style="width: 100px;">
+                    {{-- <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image" style="width: 100px;"> --}}
+                    <div class="kt-avatar kt-avatar--outline kt-avatar--circle" id="kt_user_avatar_3">
+                        <div  class="kt-avatar__holder"  style="background-image: url({{ asset('cms/dist/img/user1.svg') }}); cursor:pointer"></div>
+                    </div>
                     @endif
                     @endif
 
                 </div>
 
                 @if (Auth::guard('admin')->id())
-                <h3 class="profile-username text-center"> {{ auth('admin')->user()->full_name }}</h3>
+                <div style="display: flex ; align-items: center; justify-content: center; gap: 7px">
+                    <h3 class="profile-username text-center"> {{ auth('admin')->user()->full_name }}  </h3>
+                @if( auth('admin')->user()->status  == 'active')
+                         <a class="" style="width: 12px ; height: 12px;  background:#28a745; border-radius: 50%; ">   </a>
+                @endif
+                </div>
                 @elseif (Auth::guard('author')->id())
                 <h3 class="profile-username text-center"> {{ auth('author')->user()->full_name }}</h3>
 
@@ -103,7 +120,7 @@
 
                     <li class="list-group-item" >
                         @if($admin->user->status == 'active')
-                        <b>Status</b> <a class="float-right" style="display: flex ; align-items: center; gap: 3px">  <span style="background: #28a745;  padding:5px; border-radius: 50%;">  </span>{{ $admin->user->status }}</a>
+                        <b>Status</b> <a class="float-right" style="display: flex ; align-items: center; gap: 3px"> {{ $admin->user->status }}</a>
                         @elseif($admin->user->status == 'inactive')
                         <b>Status</b> <a class="float-right"> {{ $admin->user->status }}</a>
 
@@ -191,7 +208,7 @@
 
                      @if (Auth::guard('author')->id())
                     @if (auth('author')->user()->image !='')
-                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image" style=" width: 100%; height: auto;">
+                    <img class="profile-user-img img-fluid " src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image" style=" width: 100%; height: auto;">
 
                     @endif
                     @endif

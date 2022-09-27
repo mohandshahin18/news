@@ -14,7 +14,6 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\Website\DetailesController;
 use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,8 +31,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
 // for login
 Route::prefix('cms/')->middleware('guest:admin,author')->group(function(){
     Route::get('{guard}/login', [UserAuthController::class , 'showlogin'])->name('login.view');
@@ -64,6 +61,8 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
 
     Route::resource('cities',CityController::class);
     Route::post('update_cities/{id}', [CityController::class , 'update'])->name('update_cities');
+    Route::post('/cities/search',[CityController::class,'showCity'])->name('city.search');
+
 
     Route::resource('admins',AdminController::class);
     Route::post('update_admins/{id}', [AdminController::class , 'update'])->name('update_admins');
@@ -74,6 +73,7 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
 
     Route::resource('categories',CategoryController::class);
     Route::post('update_categories/{id}', [CategoryController::class , 'update'])->name('update_categories');
+    Route::post('/categories/search',[CategoryController::class,'showCategory'])->name('category.search');
 
 
     Route::resource('articles',ArticleController::class);
@@ -88,6 +88,7 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
 
     Route::resource('permissions',PermissionController::class);
     Route::post('update_permissions/{id}', [PermissionController::class , 'update'])->name('update_permissions');
+    // Route::post('/permissions/search',[PermissionController::class,'showPermission'])->name('permission.search');
 
 
     Route::resource('roles.permissions',RolePermissionController::class);
@@ -97,6 +98,7 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
 
 
     Route::get('contacts', [ContactController::class ,  'index'])->name('contacts.index');
+    Route::post('/contacts/search',[ContactController::class,'showContact'])->name('contact.search');
 
 
 
@@ -105,16 +107,28 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
 Route::prefix('home/')->group(function(){
 
     Route::get('', [HomeController::class ,  'indexSlider'])->name('news.index');
+    // Route::get('/{id}', [HomeController::class ,  'parent'])->name('parent');
     Route::get('news-detailes/{id}', [HomeController::class ,  'indexDetailes'])->name('news.detailes');
     Route::get('contact',[HomeController::class ,'contact'])->name('news.contact');
     Route::get('all-news',[HomeController::class ,'allNews'])->name('all-news');
+    Route::get('profile',[HomeController::class ,'profile'])->name('profile.visitor')->middleware('auth:visitor');
+    Route::get('update_profile/{id}', [HomeController::class , 'editProfile'])->middleware('auth:visitor'  );
+    Route::post('update_profile/{id}', [HomeController::class , 'updateProfile'])->name('update_Profile_visitor')->middleware('auth:visitor');
 
     Route::post('contacts', [ContactController::class ,  'store']);
-    Route::post('comments',[CommerntController::class ,'store']);
+    Route::post('comments',[CommerntController::class ,'store'])->middleware('auth:visitor');
+    Route::delete('comments/{id}',[CommerntController::class ,'destroy'])->middleware('auth:visitor');
 
-
+    // ->middleware('auth:visitor')
 
 
 
 
 });
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

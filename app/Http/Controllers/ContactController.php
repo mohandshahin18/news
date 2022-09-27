@@ -15,9 +15,23 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::orderBy('id', 'desc')->Paginate(12);
+        $contacts = Contact::orderBy('id', 'desc');
         return response()->view('cms.contact.index',compact('contacts'));
     }
+
+
+    public function showContact(Request $request)
+    {
+       $contacts = Contact::orderBy('id', 'desc')->get();
+       if($request->keyword != ''){
+       $contacts = Contact::where('name','LIKE','%'.$request->keyword.'%')->get();
+       }
+       return response()->json([
+          'contacts' => $contacts
+       ]);
+     }
+
+
 
     /**
      * Show the form for creating a new resource.

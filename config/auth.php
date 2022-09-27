@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'visitor',
+        'passwords' => 'visitors',
     ],
 
     /*
@@ -47,6 +47,10 @@ return [
         'author' => [
             'driver' => 'session',
             'provider' => 'authors',
+        ],
+        'visitor' => [
+            'driver' => 'session',
+            'provider' => 'visitors',
         ],
     ],
 
@@ -82,6 +86,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Author::class,
         ],
+        'visitors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Visitor::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -106,6 +114,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'visitors' => [
+            'provider' => 'visitors',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

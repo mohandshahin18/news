@@ -1,68 +1,30 @@
 $(document).ready(function(){
 
 
+var headerProfileAvatar = document.getElementById("avatarWrapper")
+var headerProfileDropdownArrow = document.getElementById("dropdownWrapperArrow");
+var headerProfileDropdown = document.getElementById("dropdownWrapper");
 
+document.addEventListener("click", function(event) {
+var headerProfileDropdownClickedWithin = headerProfileDropdown.contains(event.target);
 
-
-    // for show info divice  page
-    $('.similar-diviice-carousel').owlCarousel({
-      items : 3,
-      rtl : false ,
-      loop:true,
-      margin:20,
-      nav:true,
-      dots:false,
-      autoplay : true ,
-      autoplaySpeed : 2500 ,
-      smartSpeed : 1200 ,
-      autoplayTimeout : 3500 ,
-      autoplayHoverPause : true ,
-      responsive:{
-          0:{
-              items:1
-          },
-          600:{
-              items:2
-          },
-          800:{
-            items:2
-        },
-        1100:{
-          items:3
-          }
-      }
-    });
-
-
-
-      // for mobile page
-  $('.similar-carousel').owlCarousel({
-    items : 5,
-    rtl : false ,
-    loop:true,
-    margin:20,
-    nav:true,
-    dots:false,
-    autoplay : true ,
-    autoplaySpeed : 600 ,
-    smartSpeed : 800 ,
-    autoplayTimeout : 3000 ,
-    autoplayHoverPause : true ,
-    responsive:{
-        0:{
-            items:2
-        },
-        600:{
-            items:3
-        },
-        800:{
-          items:4
-      },
-      1100:{
-        items:5
-        }
+  if (!headerProfileDropdownClickedWithin) {
+    if (headerProfileDropdown.classList.contains("active")) {
+      headerProfileDropdown.classList.remove("active");
+      headerProfileDropdownArrow.classList.remove("active");
     }
-  });
+  }
+});
+
+headerProfileAvatar.addEventListener("click", function(event) {
+  headerProfileDropdown.classList.toggle("active");
+  headerProfileDropdownArrow.classList.toggle("active");
+  event.stopPropagation();
+});
+
+
+
+
 });
 
 

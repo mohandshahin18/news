@@ -14,7 +14,7 @@ class CommerntController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -44,6 +44,8 @@ class CommerntController extends Controller
         if( ! $validator->fails()){
             $comments = new Comment();
             $comments->comment= $request->get('comment');
+            $comments->visitor_id= $request->get('visitor_id');
+            $comments->image= $request->get('image');
             $comments->article_id= $request->get('article_id');
 
 
@@ -104,6 +106,13 @@ class CommerntController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cities = Comment::destroy($id);
+        // return response()->json(['icon' => 'success','title'=>'Deleted is Successfully'],200);
+
+        // return redirect()->intended(route('news.detailes'));
+        // return ['redirect' =>route('news.index')];
+
+
+
     }
 }

@@ -4,7 +4,8 @@
 @section('title' , 'Index Category')
 
 @section('styles')
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('main-title' , 'Index Category')
@@ -34,13 +35,9 @@
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-default">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
+                <form action="" method="POST">
+                    <input type="text" class="form-control"   placeholder="Search by name" id="search">
+                </form>
             </div>
           </div>
         </div>
@@ -110,6 +107,9 @@
             let url  = '/cms/admin/categories/'+id;
             confirmDestroy(url,referance);
         }
+
+
+
     </script>
 @endsection
 

@@ -149,3 +149,38 @@ h3.my-4 {
     height: 73px;
     overflow: hidden;
 }
+.media-body .cont .buuton-delete{
+    background: unset !important;
+    border: unset !important;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s ease;
+
+
+}
+
+.media-body .cont .buuton-delete i{
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.media-body .cont .buuton-delete:hover i ,
+.media-body .cont .buuton-delete:hover{
+    color: rgb(221, 51, 51);
+
+}
+
+.buuton-delete:focus{
+    outline: unset !important;
+}
+
+.dropdown-menu.show{
+    position: absolute;
+    will-change: transform;
+    top: 0px;
+    left: -60px !important;
+    transform: translate3d(0px, 22px, 0px);
+}

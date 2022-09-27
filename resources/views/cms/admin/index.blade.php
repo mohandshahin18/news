@@ -40,7 +40,7 @@
             <form action="" method="POST">
                   <div class="col-md-6" >
                      <div class="input-group mb-3" style="width: 230px;">
-                            <input type="text" class="form-control"   placeholder="Search admin" id="search">
+                            <input type="text" class="form-control live-search-box" placeholder="Search admin" >
                                 <div class="input-group-prepend">
                                         <span class="input-group-text " id="basic-addon1" > <i class="fas fa-search"></i></span>
                                 </div>
@@ -78,7 +78,7 @@
 
                 @foreach($admins as $admin)
 
-                    <tr>
+                    <tr class="live-search-list">
                         <td>{{ $admin->id }}</td>
                         <td>{{ $admin->user ? $admin->user->firstname . " " . $admin->user->lastname: "Not Found" }}</td>
                         {{-- <td>{{ $admin->user->country ? $admin->user->country->country_name : "Not Found"}}</td> --}}
@@ -145,6 +145,9 @@
             let url  = '/cms/admin/admins/'+id;
             confirmDestroy(url,referance);
         }
+
+        ////////////////////////////////////////////
+
 
     </script>
 @endsection

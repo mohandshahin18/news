@@ -1,0 +1,55 @@
+
+
+        //for search category
+
+        $('#search').on('keyup', function(){
+        search();
+    });
+    search();
+    function search(){
+         var keyword = $('#search').val();
+         $.post('{{ route("category.search") }}',
+          {
+             _token: $('meta[name="csrf-token"]').attr('content'),
+             keyword:keyword
+           },
+           function(data){
+            table_post_row(data);
+              console.log(data);
+           });
+    }
+    // table row with ajax
+    function table_post_row(res){
+    let htmlView = '';
+    if(res.categories.length <= 0){
+        htmlView+= `
+           <tr>
+              <td colspan="12" style="text-align: center;">No data.</td>
+          </tr>`;
+    }
+    for(let i = 0; i < res.categories.length; i++){
+        htmlView += `
+            <tr>
+                <td>`+res.categories[i].id+`</td>
+                  <td>`+res.categories[i].name+`</td>
+                   <td>`+res.categories[i].description+`</td>
+                   <td>`+
+
+                    ' @canAny(['Edit-Category','Delete-Category'])'+
+                    '<div style="display: flex; gap: 5px;">' +
+                        ' @can('Edit-Category')'+
+                            '<a href="{{ route('categories.edit' , $category->id )}}" type="button" class="btn btn-primary">Edit</a>'+
+                            '@endcan'+
+                            ' @can('Delete-Category')'+
+                            '<a href="#" onclick="performDestroy({{ $category->id }},this)" type="button" class="btn btn-danger">Delete</a>'+
+                            '@endcan'+
+                    '</div>' +
+                    '@endcanAny'
+
+                    +`</td>
+
+
+            </tr>`;
+    }
+         $('tbody').html(htmlView);
+    }

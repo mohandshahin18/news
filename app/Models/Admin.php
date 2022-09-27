@@ -24,6 +24,10 @@ class Admin extends Authenticatable
         return $this->user->image ;
     }
 
+    public function getStatusAttribute(){
+        return $this->user->status ;
+    }
+
 
     protected static function boot() {
         parent::boot();
@@ -34,7 +38,7 @@ class Admin extends Authenticatable
         });
     }
 
-    
+
 
 
 

@@ -21,6 +21,19 @@ class CityController extends Controller
         return response()->view('cms.city.index', compact('cities'));
     }
 
+
+    public function showCity(Request $request)
+    {
+       $cities = City::all();
+       if($request->keyword != ''){
+       $cities = City::where('city_name','LIKE','%'.$request->keyword.'%')->get();
+       }
+       return response()->json([
+          'cities' => $cities
+       ]);
+     }
+
+
     /**
      * Show the form for creating a new resource.
      *
