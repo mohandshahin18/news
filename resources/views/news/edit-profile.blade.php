@@ -9,13 +9,8 @@
 
 
 @section('content')
-{{-- <input type="text" value="{{ Auth::guard('visitor')->id() }}" name="" id=""> --}}
 
-<div class="container" style="    padding: 3%;
-margin-top: 2%;
-margin-bottom: 2%;
-border-radius: 0.5rem;
-background: #fff;">
+<div class="container shadow" style="    padding: 3%; margin-top: 2%; margin-bottom: 2%; border-radius: 0.5rem; background: #fff;">
     <div class="row gutters">
     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
     <div class="card h-100">

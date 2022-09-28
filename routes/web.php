@@ -114,6 +114,8 @@ Route::prefix('home/')->group(function(){
     Route::get('profile',[HomeController::class ,'profile'])->name('profile.visitor')->middleware('auth:visitor');
     Route::get('update_profile/{id}', [HomeController::class , 'editProfile'])->middleware('auth:visitor'  );
     Route::post('update_profile/{id}', [HomeController::class , 'updateProfile'])->name('update_Profile_visitor')->middleware('auth:visitor');
+    Route::get('edit/password', [HomeController::class , 'editPassword'])->name('news.edit-password');
+    Route::post('update/password', [HomeController::class , 'updatePassword'])->name('news.update-password');
 
     Route::post('contacts', [ContactController::class ,  'store']);
     Route::post('comments',[CommerntController::class ,'store'])->middleware('auth:visitor');

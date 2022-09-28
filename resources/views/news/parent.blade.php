@@ -131,7 +131,7 @@
                       <div class='dropdown-links'>
                         <a href='{{ route('profile.visitor') }}'>Profile</a>
                         <a href='{{ route('update_Profile_visitor' , Auth::guard('visitor')->id()) }}'> Edit profile</a>
-                        {{-- <a href='{{ route('password.confirm') }}'> Reste password</a> --}}
+                        <a href='{{ route('news.edit-password') }}'> Edit password</a>
                         <a href='{{ route('logout') }}'>Sign out</a>
                       </div>
                     </div>

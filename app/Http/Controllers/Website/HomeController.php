@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Slider;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -136,6 +137,60 @@ class HomeController extends Controller
             return response()->json(['icon'=>'error','title'=>$validator->getMessageBag()->first()],400);
         }
     }
+
+    /////////////////////////////////////////////////
+
+
+    public function editPassword(){
+        return response()->view('news.edit-passwoed');
+    }
+
+
+    public function updatePassword(Request $request){
+
+        $guard = auth('visitor')->check();
+
+
+        $validator = validator($request->all(),[
+            'current_password'=>'required',
+            'new_password'=>'required|string|min:6|max:25|confirmed',
+            'new_password_confirmation'=>'required|string|min:6|max:25'
+        ], [
+            'new_password.confirmed'=>"Passwords do not match , Please verify the password",
+            'current_password.required'=> "The current password field is required.",
+        ]);
+
+
+        //new password can not be the old password!
+        if (Hash::check($request->current_password, auth()->user()->password) == Hash::check($request->new_password, auth()->user()->password)) {
+            return response()->json(['icon'=>'error','title'=>'new password can not be the old password!'],400);
+        }
+
+
+        //Match The Old Password
+        if(!Hash::check($request->current_password, auth()->user()->password)){
+            return response()->json(['icon'=>'error','title'=>"Old Password Doesn't match!"],400);
+        }
+
+
+        if(! $validator->fails()){
+
+            $visitor = auth('visitor')->user();
+            $visitor->password = Hash::make($request->get('new_password'));
+            $isSaved =$visitor->save();
+
+
+            if($isSaved){
+                return response()->json(['icon'=>'success','title'=>'Updated is successfully'],200);
+            }else{
+                return response()->json(['icon'=>'error','title'=>'Updated is failed'],400);
+
+            }
+        }else{
+            return response()->json(['icon'=>'error' , 'title'=>$validator->getMessageBag()->first()],400);
+        }
+    }
+
 
 
 }
