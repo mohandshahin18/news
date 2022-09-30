@@ -37,11 +37,11 @@ class HomeController extends Controller
 
 
 
-    public function allNews(){
-        $categories = category::get();
-        $articles = Article::orderBy('created_at', 'desc')->Paginate(10);
+    public function allNews($id){
+        $categories = category::findOrFail($id);
+        $articles = Article::where('category_id',$id)->orderBy('created_at', 'desc')->Paginate(7);
 
-        return response()->view('news.all-news' ,compact('categories','articles'));
+        return response()->view('news.all-news' ,compact('categories','articles','id'));
     }
 
 
@@ -63,7 +63,8 @@ class HomeController extends Controller
         $categories = category::all();
         $articles = Article::with('comments')->findOrFail($id);
         $comments = Comment::orderBy('id', 'desc')->Paginate(7);
-        $Allarticles = Article::where('id', '!=', $id  )->inRandomOrder()->take(3)->get();
+        // $Allarticles = Article::where('id', '!=', $id  )->inRandomOrder()->take(5)->get();
+        $Allarticles = Article::where('id', '!=', $id  )->where('category_id',$articles->category_id)->inRandomOrder()->take(4)->get();
         $visitors = Visitor::all();
 
 

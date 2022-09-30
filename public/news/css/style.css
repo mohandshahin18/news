@@ -528,6 +528,7 @@ transition: all 0.7s ease-in-out;
 .like-dev{
     cursor: pointer;
     margin-top: 17px;
+    display: inline-block;
 }
 .comment{
     margin-bottom: 5px !important;
@@ -739,3 +740,41 @@ hr{
       font-size: 30px;
     }
   }
+
+  .nice-select {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 37px !important;
+    border-radius: 5px !important;
+    border: 1px  solid #cfd1d8 !important;
+    margin-bottom: 1rem;
+}
+
+  .form-control,
+  .register{
+    height: 37px !important;
+    border: 1px  solid #cfd1d8 ;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+.form-control:focus
+.register:focus ,
+.nice-select:focus {
+    color: #495057;
+    border-color: #80bdff !important;
+    outline: 0;
+}
+  .nice-select .list{
+    width: 100% !important;
+}
+.select-border{
+    border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+    -ms-border-radius: 2px !important;
+    -o-border-radius: 2px !important;
+}
+
+textarea.form-control {
+    height: auto !important;
+}

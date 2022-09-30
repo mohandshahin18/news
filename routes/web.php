@@ -88,7 +88,7 @@ Route::prefix('cms/admin/')->middleware('auth:admin,author')->group(function(){
 
     Route::resource('permissions',PermissionController::class);
     Route::post('update_permissions/{id}', [PermissionController::class , 'update'])->name('update_permissions');
-    // Route::post('/permissions/search',[PermissionController::class,'showPermission'])->name('permission.search');
+    Route::post('/permissions/search',[PermissionController::class,'showPermission'])->name('permission.search');
 
 
     Route::resource('roles.permissions',RolePermissionController::class);
@@ -110,7 +110,7 @@ Route::prefix('home/')->group(function(){
     // Route::get('/{id}', [HomeController::class ,  'parent'])->name('parent');
     Route::get('news-detailes/{id}', [HomeController::class ,  'indexDetailes'])->name('news.detailes');
     Route::get('contact',[HomeController::class ,'contact'])->name('news.contact');
-    Route::get('all-news',[HomeController::class ,'allNews'])->name('all-news');
+    Route::get('all-news/{id}',[HomeController::class ,'allNews'])->name('all-news');
     Route::get('profile',[HomeController::class ,'profile'])->name('profile.visitor')->middleware('auth:visitor');
     Route::get('update_profile/{id}', [HomeController::class , 'editProfile'])->middleware('auth:visitor'  );
     Route::post('update_profile/{id}', [HomeController::class , 'updateProfile'])->name('update_Profile_visitor')->middleware('auth:visitor');

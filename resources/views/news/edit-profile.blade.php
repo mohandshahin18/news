@@ -102,13 +102,15 @@
                 </div>
 
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
                         <label for="gender">Gender</label>
-                            <select class="form-control" name="gender" id="gender" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                       <option selected >{{ $visitors->gender }} </option>
+                            <select class="form-control" name="gender" id="gender" >
+                                       <option selected data-display="Select">{{ $visitors->gender }} </option>
                                        <option value="male">Male</option>
                                        <option value="female">Female</option>
                             </select>
 
+                </div>
                 </div>
 
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -454,6 +456,7 @@ var KTAvatarDemo = function () {
 KTUtil.ready(function() {
 	KTAvatarDemo.init();
 });
+
 
 
   </script>

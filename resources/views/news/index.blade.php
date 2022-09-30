@@ -16,7 +16,7 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            {{-- <li data-target="#carouselExampleIndicators" data-slide-to="3"></li> --}}
         </ol>
         <div class="carousel-inner" role="listbox">
             <!-- Slide One - Set the background image for this slide in the line below -->
@@ -87,7 +87,7 @@
 
         <div class="row">
             @foreach($category->articles as $article)
-            @if($article->category_id == $category->id)
+            {{-- @if($article->category_id == $category->id) --}}
             <div class="col-lg-4 col-sm-6 portfolio-item">
                 <div class="card h-100">
                     <a href="{{ route('news.detailes',$article->id) }}"><img class="card-img-top" src="{{ asset('storage/images/article/'. $article->image) }}" alt=""></a>
@@ -103,12 +103,12 @@
                 </div>
             </div>
 
-            @endif
+            {{-- @endif --}}
             @endforeach
         </div>
 
 
-        <div align="center"><a class="btn btn-success" href="{{ route('all-news') }}">more news</a></div>
+        <div align="center"><a class="btn btn-success" href="{{ route('all-news',$category->id) }}">more news</a></div>
     </div>
 </section>
 

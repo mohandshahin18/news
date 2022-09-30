@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Author;
 use App\Models\category;
 use App\Models\Country;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -37,10 +38,12 @@ class UserAuthController extends Controller
 
 
         ];
+
         if(! $validator->fails()){
 
             if(Auth::guard($request->get('guard'))->attempt($credintial)){
                 return response()->json(['icon'=>'success' , 'title' => 'Login Successfully'], 200);
+
             }else{
                 return response()->json(['icon'=>'error' , 'title' => 'Wrong in email or password'], 400);
 

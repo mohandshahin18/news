@@ -59,7 +59,7 @@
                     <div class="card-body">
                     <form>
                         <div class="form-group">
-                        <textarea class="form-control" id="comment" name="comment" placeholder="Enter a comment"  rows="3"></textarea>
+                        <textarea class="form-control" id="comment" name="comment" placeholder="Enter a comment" style="min-height: 80px !important"  rows="3"></textarea>
                         </div>
                         <input type="text" name="article_id" id="article_id" value="{{ $articles->id }}" readonly  hidden >
                         <input type="text" name="visitor_id" id="visitor_id" value="{{ auth('visitor')->user()->id  }}" readonly  hidden >
@@ -77,7 +77,7 @@
                     <div class="card-body">
                     <form>
                         <div class="form-group">
-                        <textarea class="form-control" placeholder="Enter a comment" rows="3" ></textarea>
+                        <textarea class="form-control" placeholder="Enter a comment" style="min-height: 80px !important"  rows="3" ></textarea>
                         </div>
 
                         <button type="button" data-toggle="modal"  data-target="#login" class="btn btn-primary" >Submit</button>
@@ -130,9 +130,9 @@
 
 
                         </div>
-                    {{ $comment->comment }}
+                    {{ $comment->comment }} <br>
                     @if (Auth::guard('visitor')->id())
-                    <div class="like-dev"  ><i class="fas fa-thumbs-up  unLike" aria-hidden="true"></i></div>
+                    <div class="like-dev" ><i class="fas fa-thumbs-up  unLike" aria-hidden="true"></i></div>
                     @else
                     <div class="like-dev"  data-toggle="modal"  data-target="#login"><i class="fas fa-thumbs-up  " aria-hidden="true"></i></div>
 
@@ -155,48 +155,27 @@
 
         </div>
 
-        {{-- @foreach ($categories as $category )
-        @if($articles->category_id == $category->id ) --}}
 
         <div class="col-md-4">
 
-            @foreach($Allarticles as $article )
-            {{-- @foreach ($categories as $category ) --}}
-            {{-- @if($articles->category_id == $category->id ) --}}
+            @foreach($Allarticles as $Allarticle )
+            @if($articles->category_id == $Allarticle->category_id )
 
-            {{-- <h1 class="mt-4 mb-3">{{ $category->name }}</h1> --}}
-
-
-
-            {{-- @if($article->category_id == $category->id ) --}}
-
-            {{-- <input type="text" value="{{$articles->category_id  }}" name="" id=""> --}}
             <!-- Side Widget -->
             <div class="card my-4 ">
-                <a href="{{ route('news.detailes',$article->id) }}">
-                    <h5 class="card-header title-same">{{$article->title}}</h5>
+                <a href="{{ route('news.detailes',$Allarticle->id) }}">
+                    <h5 class="card-header title-same">{{$Allarticle->title}}</h5>
                 </a>
                 <div class="card-body same-news" style="">
-                    <a href="{{ route('news.detailes',$article->id) }}"><img class="img-card"  src="{{ asset('storage/images/article/'. $article->image) }}" alt=""></a>
-                <a href="{{ route('news.detailes',$article->id) }}"><p > {{$article->short_description}}</p></a>
+                    <a href="{{ route('news.detailes',$Allarticle->id) }}"><img class="img-card"  src="{{ asset('storage/images/article/'. $Allarticle->image) }}" alt=""></a>
+                <a href="{{ route('news.detailes',$Allarticle->id) }}"><p > {{$Allarticle->short_description}}</p></a>
                 </div>
             </div>
-            {{-- @endif --}}
 
-            {{-- @endif --}}
-
-            {{-- @endforeach --}}
+            @endif
             @endforeach
 
           </div>
-
-{{--
-        @endif
-        @endforeach --}}
-
-
-
-
 
 
 

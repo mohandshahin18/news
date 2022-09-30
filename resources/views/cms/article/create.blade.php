@@ -64,7 +64,7 @@
 
             <div class="form-group">
                 <label for="full_description">Full Description</label>
-                <textarea class="form-control" rows="3"  name="full_description" id="full_description"  placeholder="Enter Full Description of Article"></textarea>
+                <textarea class="form-control" rows="3"  name="full_description" id="full_description"  placeholder="Enter Full Description of Article"  style="min-height: 80px !important"></textarea>
               </div>
 
               <div class="form-group ">

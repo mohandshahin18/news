@@ -27,9 +27,8 @@
      <!-- My File css -->
      <link rel="stylesheet" href="{{ asset('news/css/style.css') }}">
      <link rel="stylesheet" href="{{ asset('news/css/style-en.css') }}">
-           <!-- my owl carousel file  -->
-    <link rel="stylesheet" href="{{ asset('news/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('news/css/owl.theme.default.min.css') }}">
+           <!-- nice select file  -->
+    <link rel="stylesheet" href="{{ asset('news/css/nice-select.css') }}">
 
     @yield('style')
 
@@ -39,8 +38,9 @@
 
     @php
     use App\Models\Visitor;
-    // $categories = category::limit(3)->get();
-    // $visitors = Visitor::all();
+    use App\Models\category;
+    $categories = category::limit(3)->get();
+    $visitors = Visitor::all();
 
 
 
@@ -61,17 +61,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('news.index') }}">Home</a>
                 </li>
-                {{-- @foreach ( $categories as $category )
+                @foreach ( $categories as $category )
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('all-news',$category->id) }}">{{ $category->name }}</a>
                 </li>
-                @endforeach --}}
+                @endforeach
 
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('all-news') }}">All News</a>
-                </li>
+                </li> --}}
 
 
                 <li class="nav-item">
@@ -170,14 +170,21 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{{ asset('cms/js/crud.js') }}"></script>
 <script src="{{ asset('cms/plugins/toastr/toastr.min.js') }}"></script>
-<!-- my owl carousel file  -->
-<script src="{{ asset('news/js/owl.carousel.min.js') }}"></script>
+<!-- nice select file  -->
+<script src="{{ asset('news/js/jquery.nice-select.min.js') }}"></script>
 
 <!-- my file js and jquery  -->
 <script src="{{ asset('news/js/custom-en.js') }}"></script>
 <script src="{{ asset('news/js/custom.js') }}"></script>
 
+<script>
 
+    // for nice select
+
+    $(document).ready(function(){
+    $('select').niceSelect();
+    });
+    </script>
 @yield('scripts')
 
 

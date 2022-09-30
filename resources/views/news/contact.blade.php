@@ -86,7 +86,7 @@
             <div class="control-group form-group">
               <div class="controls">
                 <label for="message">Message:</label>
-                <textarea rows="10" cols="100" class="form-control" name="message" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                <textarea rows="10" cols="100" class="form-control" name="message" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none ;height: 210px !important;"></textarea>
               </div>
             </div>
             <div id="success"></div>

@@ -80,7 +80,7 @@
         <!-- /.card-body -->
       </div>
       <div style="display: flex; align-items: center; justify-content: center;">
-        {{-- {{ $permissions->links() }} --}}
+        {{ $permissions->links() }}
     </div>
       <!-- /.card -->
     </div>

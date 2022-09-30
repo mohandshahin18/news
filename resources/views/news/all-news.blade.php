@@ -11,15 +11,19 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">All News
-        {{-- <small>Subheading</small> --}}
-      </h1>
+      {{-- @foreach ($categories as $category )
+      @if($articles->category_id == $category->id ) --}}
+
+      <h1 class="mt-4 mb-3">{{ $categories->name }}</h1>
+
+      {{-- @endif
+      @endforeach --}}
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="{{ route('news.index') }}">Home</a>
         </li>
-        <li class="breadcrumb-item active">All News</li>
+        <li class="breadcrumb-item active">{{ $categories->name }}</li>
       </ol>
 
 

@@ -52,7 +52,10 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $validator = validator($request->all(),[
-            'name'=>'required'
+            'name'=>'required|max:255',
+            'mobile'=>'required|',
+            'email'=>'required|email',
+            'message'=>'required'
         ],[
 
         ]);

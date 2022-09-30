@@ -61,7 +61,7 @@
 
             <div class="form-group col-md-12">
                 <label for="full_description"> Full Description</label>
-                <textarea class="form-control" rows="3"  name="full_description" id="full_description"  value=""  placeholder="Enter Description of Article "> {{ $articles->full_description}}</textarea>
+                <textarea class="form-control" rows="3"  name="full_description" id="full_description"  value=""  placeholder="Enter Description of Article "  > {{ $articles->full_description}}</textarea>
             </div>
 
             <div class="form-group">
