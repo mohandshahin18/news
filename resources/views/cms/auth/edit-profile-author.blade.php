@@ -31,7 +31,8 @@
 
 
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
+            <div class="form-group ">
                 <label for="country_id">Name Country</label>
                 <select class="form-control select2 select2-hidden-accessible" name="country_id" id="country_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                     {{-- <option value="{{ $authors->id}}"  >{{ $authors->country->country_name }}</option> --}}
@@ -45,6 +46,7 @@
 
                 </select>
 
+            </div>
             </div>
 
 
@@ -63,15 +65,18 @@
                 </div>
 
            </div>
-
-            <div class="form-group col-md-4">
+           <div class="col-md-4">
+            <div class="form-group ">
                 <label for="mobile">Mobile</label>
                 <input type="text" class="form-control" name="mobile" id="mobile" value="{{ $authors->user->mobile }}" placeholder="Enter Mobile of Author">
             </div>
+            </div>
 
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
+            <div class="form-group ">
                 <label for="email">Email</label>
                 <input type="text" class="form-control" name="email" id="email"  value="{{ $authors->email }}" placeholder="Enter Email of Author">
+              </div>
               </div>
 
 
@@ -80,7 +85,7 @@
                 <input type="password" class="form-control" name="password" id="password"  placeholder="Enter Password of Author">
             </div> --}}
 
-
+            <div class="col-md-4">
               <div class="form-group col-md-4">
                 <label for="gender">Gender</label>
                 <select class="form-control select2 select2-hidden-accessible" name="gender" id="gender" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -90,8 +95,9 @@
                 </select>
 
                 </div>
-
-                <div class="form-group col-md-4">
+                </div>
+                <div class="col-md-4">
+                <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control select2 select2-hidden-accessible" name="status" id="status" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                <option selected>{{ $authors->user->status }}</option>
@@ -100,23 +106,28 @@
                     </select>
 
                     </div>
+                    </div>
 
-
-            <div class="form-group col-md-4">
+                    <div class="col-md-4">
+            <div class="form-group ">
               <label for="date_of_birth">Date Of Birth</label>
               <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" value="{{ $authors->user->date_of_birth }}" placeholder="Enter Date of Birth of Author">
             </div>
+            </div>
 
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
+            <div class="form-group ">
                 <label for="image">Image</label>
                 <input type="file" class="form-control" value="{{ $authors->user->image }}" name="image" id="image"  placeholder="Enter image of Author">
               </div>
+              </div>
 
-
-            <div class="form-group col-md-4">
+              <dv class="col-md-4">
+            <div class="form-group ">
                 <label for="file">File</label>
                 <input type="file" class="form-control" value="{{ $authors->user->file }}" name="file" id="file"  placeholder="Enter image of Author">
               </div>
+              </dv>
 
 
 

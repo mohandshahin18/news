@@ -14,8 +14,8 @@ class NewCommentNotification extends Notification
     use Queueable;
 
 
-    protected $comment;
-    protected $visitor;
+    // protected $comment;
+    // protected $visitor;
 
 
     /**
@@ -23,10 +23,11 @@ class NewCommentNotification extends Notification
      *
      * @return void
      */
-    public function __construct(Comment $comment , Visitor $visitor)
+    public function __construct( $comment , $article , $visitor)
     {
         $this->comment = $comment;
-        $this->visitor = $visitor;
+        $this->article_id = $article;
+        $this->visitor_id = $visitor;
     }
 
     /**
@@ -37,14 +38,8 @@ class NewCommentNotification extends Notification
      */
     public function via($notifiable) // $notifiable هو عبارة عن الشخص الي بدي ارسل الو الاشعار أوالمودل الي بدي ارسل الوالاشعار
     {
-        $via=['database'];
-        if($notifiable->notfiy_mail){
-           $via = 'mail';
-        }
-        if($notifiable->notfiy_sma){
-            $via = 'nexmo';
-         }
-        return  $via;
+        return ['database'];
+
     }
 
     /**
@@ -58,16 +53,13 @@ class NewCommentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->subject('New comment')
+                    ->line('A new comment has been commented.')
+                    ->action('view comment', url('/'))
                     ->line('Thank you for using our application!');
     }
 
 
-    // public function toDatabase($notifiable)
-    // {
-
-    // }
 
 
     /**
@@ -78,17 +70,15 @@ class NewCommentNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        $body = sprintf(
-            '%s comment for a article %s' ,
-            $this->visitor->firstname,
-            $this->comment->article->title ,
-            );
+        return[
+            // 'body'=>'A new comment has been commented.',
+            'comment'=> $this->comment  ,
+            'article'=> $this->article_id ,
+            'visitor'=> $this->visitor_id ,
+            'url'=> url("/home/news-detailes/$this->article_id")  ,
 
-        return [
-            'title'=>'New Comment',
-            'body'=> $body,
-            'icon'=>'fas fa-comments',
-            'url'=>route('news.detailes',$this->comment->article->id),
+
         ];
+
     }
 }

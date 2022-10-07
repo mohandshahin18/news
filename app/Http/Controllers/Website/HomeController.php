@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\category;
 use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Slider;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
@@ -61,14 +62,16 @@ class HomeController extends Controller
     public function indexDetailes($id)
     {
         $categories = category::all();
-        $articles = Article::with('comments')->findOrFail($id);
-        $comments = Comment::orderBy('id', 'desc')->Paginate(7);
-        // $Allarticles = Article::where('id', '!=', $id  )->inRandomOrder()->take(5)->get();
+        $articles = Article::findOrFail($id);
+        $comments = Comment::where('article_id',$id)->withCount('likes')->orderBy('id', 'desc')->get(); //->Paginate(7)
         $Allarticles = Article::where('id', '!=', $id  )->where('category_id',$articles->category_id)->inRandomOrder()->take(4)->get();
         $visitors = Visitor::all();
+        $likes = Like::all();
 
 
-        return response()->view('news.newsdetailes',compact('articles' , 'id','categories','comments','Allarticles','visitors'));
+
+
+        return response()->view('news.newsdetailes',compact('articles' , 'id','categories','comments','Allarticles','visitors','likes'));
 
 
     }

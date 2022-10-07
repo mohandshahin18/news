@@ -35,7 +35,7 @@
                     </div> --}}
                     @if(Auth::user()->image == null)
                         <div class="kt-avatar kt-avatar--outline kt-avatar--circle" id="kt_user_avatar_3">
-                            <div class="kt-avatar__holder" style="background-image: url({{ asset('cms/dist/img/user1.svg') }})"></div>
+                            <div class="kt-avatar__holder" style="background-image: url({{  asset('cms/dist/img/user.png') }})"></div>
                             <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="Change avatar" >
                                 <i class="fas fa-pen"></i>
                                 <input type="file" name="image" id="image" accept=".png, .jpg, .jpeg">

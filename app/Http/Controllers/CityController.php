@@ -70,6 +70,7 @@ class CityController extends Controller
             $isSaved = $cities->save();
 
             if($isSaved){
+
                 return response()->json(['icon' => 'success','title'=>'Created is Successfully'],200);
             } else{
                 return response()->json(['icon' => 'error','title'=>'Created is Failed'],400);
@@ -80,7 +81,6 @@ class CityController extends Controller
         }else{
             return response()->json(['icon'=>'error','title'=>$validator->getMessageBag()->first()],400);
         }
-
     }
 
     /**

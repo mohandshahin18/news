@@ -67,10 +67,10 @@
                 <textarea class="form-control" rows="3"  name="full_description" id="full_description"  placeholder="Enter Full Description of Article"  style="min-height: 80px !important"></textarea>
               </div>
 
-              <div class="form-group ">
-                <label for="image">Image</label>
-                <input type="file" class="form-control" name="image" id="image" placeholder="Enter image of Article">
-              </div>
+
+
+
+
 
 
 

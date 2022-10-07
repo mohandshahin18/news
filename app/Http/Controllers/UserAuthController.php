@@ -39,6 +39,7 @@ class UserAuthController extends Controller
 
         ];
 
+
         if(! $validator->fails()){
 
             if(Auth::guard($request->get('guard'))->attempt($credintial)){

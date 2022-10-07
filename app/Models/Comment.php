@@ -17,4 +17,12 @@ class Comment extends Model
         return $this->belongsTo(Visitor::class);
     }
 
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
+    public function image(){
+        return  $this->hasOne(Image::class);
+    }
+
 }

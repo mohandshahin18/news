@@ -14,8 +14,8 @@ class AddArticleIdToCommentsTable extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->foreignId('article_id');
-            $table->foreign('article_id')->references('id')->on('comments')->onDelete('cascade');
+            $table->foreignId('article_id')->after('id');
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
         });
     }
 

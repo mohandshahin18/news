@@ -31,4 +31,12 @@ class Visitor extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
+    public function image(){
+        return  $this->hasOne(Image::class);
+    }
+
 }

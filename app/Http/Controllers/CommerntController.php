@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Comment;
+use App\Notifications\NewCommentNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 
 class CommerntController extends Controller
 {
@@ -35,6 +40,10 @@ class CommerntController extends Controller
      */
     public function store(Request $request)
     {
+
+        $author_id =$request->get('author_id');
+        $article_id=$request->get('id');
+
         $validator = validator($request->all(),[
             'comment'=>'required'
         ],[
@@ -45,14 +54,23 @@ class CommerntController extends Controller
             $comments = new Comment();
             $comments->comment= $request->get('comment');
             $comments->visitor_id= $request->get('visitor_id');
-            $comments->image= $request->get('image');
+            // $comments->image= $request->get('image');
             $comments->article_id= $request->get('article_id');
 
 
             $isSaved = $comments->save();
 
+            $auhtors = Author::all();
+            // $auhtors->notify(new NewCommentNotification($request->comment ,  $request->article_id ));
+
+
+
             if($isSaved){
+                Notification::send($auhtors , new NewCommentNotification($request->comment ,  $request->article_id , $request->visitor_id));
+
                 return response()->json(['icon' => 'success','title'=>'Send is Successfully'],200);
+
+
             } else{
                 return response()->json(['icon' => 'error','title'=>'Send is Failed'],400);
 

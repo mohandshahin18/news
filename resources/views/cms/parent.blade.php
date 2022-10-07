@@ -73,58 +73,107 @@
 
           </li>
 
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
 
-      <!-- Messages Dropdown Menu -->
+
+      @php
+      use App\Models\Author;
+      use App\Models\Visitor;
+      use Illuminate\Support\Facades\Auth;
+
+      $visitors = Visitor::all();
+      $author = Auth::user();
+
+      @endphp
+
+          @if(Auth::guard('author')->id())
+                    <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
+          <i class="far fa-bell"></i>
+
+          @if( $author->unreadNotifications->count() == 0)
+                <span class="badge badge-danger navbar-badge"></span>
+          @else
+                <span class="badge badge-danger navbar-badge"> {{  $author->unreadNotifications->count() }}</span>
+          @endif
+
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="{{ asset('cms/dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right notification" style="   ">
+                {{-- <a href="{{ $author->unreadNotifications->markASRead() }}">Mark all as read</a> --}}
+
+
+            @foreach ($author->unreadNotifications as $notification )
+                    {{-- {{ $notification->markAsRead(); }} --}}
+            <a href="{{ $notification->data['url'] }}"  target="_blank" class="dropdown-item" style="background: #e5e5e5">
+                      <!-- Message Start -->
+                    <div class="media" style="gap: 10px;">
+                        @foreach ($visitors as $visitor )
+                        @if($notification->data['visitor'] == $visitor->id)
+                           <div class="img-notify"   style="background-image: url({{ asset('storage/images/visitor/'.$visitor->image) }}) ">  </div>
+                        @endif
+                    @endforeach
+
+                        <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                            @foreach ($visitors as $visitor )
+                                @if($notification->data['visitor'] == $visitor->id)
+                                   {{ $visitor->firstname . " " . $visitor->lastname}} <span class="text-sm">Commented</span>
+
+                                   {{-- {{ $notification->data['article'] }} --}}
+                                @endif
+                            @endforeach
+
+                        </h3>
+                        <p class="text-sm" style="height: 26px; overflow: hidden;"> {{ $notification->data['comment'] }}</p>
+                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{ $notification->created_at->diffForHumans();}} </p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+            </a>
+          <div class="dropdown-divider"></div>
+            @endforeach
+{{-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+            @foreach ($author->readNotifications as $notification )
+            {{-- <p class="text-sm">{{ $notification->data['comment'] }}</p> --}}
+            <a href="{{ $notification->data['url'] }}"  target="_blank" class="dropdown-item" >
+                <!-- Message Start -->
+              <div class="media" style="gap: 10px;">
+                  @foreach ($visitors as $visitor )
+                  @if($notification->data['visitor'] == $visitor->id)
+                     <div class="img-notify"   style="background-image: url({{ asset('storage/images/visitor/'.$visitor->image) }}) ">  </div>
+                  @endif
+              @endforeach
+
+                  <div class="media-body">
+                  <h3 class="dropdown-item-title">
+                      @foreach ($visitors as $visitor )
+                          @if($notification->data['visitor'] == $visitor->id)
+                             {{ $visitor->firstname . " " . $visitor->lastname}} <span class="text-sm">Commented</span>
+
+                             {{-- {{ $notification->data['article'] }} --}}
+                          @endif
+                      @endforeach
+
+                  </h3>
+                  <p class="text-sm" style="height: 26px; overflow: hidden;"> {{ $notification->data['comment'] }}</p>
+                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{ $notification->created_at->diffForHumans();}} </p>
+                  </div>
               </div>
-            </div>
-            <!-- Message End -->
-          </a>
+              <!-- Message End -->
+      </a>
+          <div class="dropdown-divider"></div>
+            @endforeach
+
 
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          <a href="#" class="dropdown-item dropdown-footer" s>See All Notification</a>
         </div>
       </li>
+          @endif
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="far fa-bell"></i>
+            <i class="far fa-comments"></i>
             <span class="badge badge-danger navbar-badge">3</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -141,6 +190,7 @@
               </div>
             </div>
             <!-- Message End -->
+
           </a>
 
           <div class="dropdown-divider"></div>
@@ -185,7 +235,7 @@
 
           @else
           {{-- <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image"> --}}
-          <div class="img-visitor-logo-cms" style="background-image: url({{ asset('cms/dist/img/user1.svg') }})"></div>
+          <div class="img-visitor-logo-cms" style="background-image: url({{  asset('cms/dist/img/user.png') }})"></div>
 
           @endif
        @endif
@@ -218,7 +268,7 @@
 
       </div>
 
-      <!-- SidebarSearch Form -->
+      {{-- <!-- SidebarSearch Form -->
       {{-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -229,6 +279,19 @@
           </div>
         </div>
       </div> --}}
+
+         <!-- SidebarSearch Form -->
+         <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+              <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                  <i class="fas fa-search fa-fw"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

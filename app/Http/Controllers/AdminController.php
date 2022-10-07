@@ -10,6 +10,7 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
@@ -33,7 +34,6 @@ class AdminController extends Controller
         }
 
         $admins = $admins->Paginate(7);
-
 
         return response()->view('cms.admin.index', compact('admins','roles'));
 

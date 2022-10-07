@@ -14,9 +14,7 @@ class AddImageToCommentsTable extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('comment');
-            $table->foreignId('visitor_id')->after('image');
-            $table->foreign('visitor_id')->references('id')->on('comments')->onDelete('cascade');
+            $table->string('image')->nullable()->after('visitor_id');
         });
     }
 

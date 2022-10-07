@@ -8,6 +8,8 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\CommerntController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotifacationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
@@ -120,6 +122,13 @@ Route::prefix('home/')->group(function(){
     Route::post('contacts', [ContactController::class ,  'store']);
     Route::post('comments',[CommerntController::class ,'store'])->middleware('auth:visitor');
     Route::delete('comments/{id}',[CommerntController::class ,'destroy'])->middleware('auth:visitor');
+
+   Route::post('like', [LikeController::class, 'like'])->name('like')->middleware('auth:visitor');
+   Route::post('dislike', [LikeController::class, 'dislike'])->name('dislike')->middleware('auth:visitor');
+
+
+//    Route::get('notifacation', [NotifacationController::class , 'index'])->name('notifacation');
+
 
     // ->middleware('auth:visitor')
 

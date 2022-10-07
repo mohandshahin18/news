@@ -33,7 +33,7 @@
                   @else
                     {{-- <img class="brand-image img-circle img-bordered-sm img-responsive " src="{{ asset('cms/dist/img/user1.svg') }}"alt="User Image"  style="width: 100px;"> --}}
                     <div class="kt-avatar kt-avatar--outline kt-avatar--circle" id="kt_user_avatar_3">
-                        <div  class="kt-avatar__holder"  style="background-image: url({{ asset('cms/dist/img/user1.svg') }}); cursor:pointer"></div>
+                        <div  class="kt-avatar__holder"  style="background-image: url({{  asset('cms/dist/img/user.png') }}); "></div>
                     </div>
                     @endif
                     @endif
@@ -193,14 +193,15 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="image" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal " id="image" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content"  style="background: transparent; box-shadow:unset; border: unset">
 
         <div class="modal-body">
             @if (Auth::guard('admin')->id())
                     @if (auth('admin')->user()->image !='')
-                    <img  src="{{ asset('storage/images/admin/' . auth('admin')->user()->image) }}"alt="User Image" style=" width: 100%; height: auto;">
+                    {{-- <img  src="{{ asset('storage/images/admin/' . auth('admin')->user()->image) }}"alt="User Image" style=" width: 100%; height: auto;"> --}}
+                    <div  class="profile-img-modal"  style="background-image: url({{  asset('storage/images/admin/' . auth('admin')->user()->image) }});"></div>
 
                     @endif
                     @endif
@@ -208,7 +209,8 @@
 
                      @if (Auth::guard('author')->id())
                     @if (auth('author')->user()->image !='')
-                    <img class="profile-user-img img-fluid " src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image" style=" width: 100%; height: auto;">
+                    {{-- <img class="profile-user-img img-fluid " src="{{ asset('storage/images/author/' . auth('author')->user()->image) }}"alt="User Image" style=" width: 100%; height: auto;"> --}}
+                    <div  class="profile-img-modal"  style="background-image: url({{asset('storage/images/author/' . auth('author')->user()->image) }});"></div>
 
                     @endif
                     @endif

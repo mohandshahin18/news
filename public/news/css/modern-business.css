@@ -181,6 +181,6 @@ h3.my-4 {
     position: absolute;
     will-change: transform;
     top: 0px;
-    left: -60px !important;
+    left: 0 ;
     transform: translate3d(0px, 22px, 0px);
 }

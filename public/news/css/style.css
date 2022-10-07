@@ -536,28 +536,98 @@ transition: all 0.7s ease-in-out;
 hr{
     /* margin-top: 5px; */
 }
-.like{
-    color: #1877F2;
-    cursor: pointer;
-    animation-name: like;
-    animation-duration: 0.4s;
-    animation-timing-function: linear;
-}
 
-@keyframes like {
-
-    50% {
-        transform: scale(1.17) ;
-        -webkit-transform: scale(1.17) ;
-        -moz-transform: scale(1.17) ;
-        -ms-transform: scale(1.17) ;
-        -o-transform: scale(1.17) ;
-}
+.img-comment {
+    width: 50px;
+    height: 50px;
+    /* border-radius: 3px; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 20px;
 }
 
 
+.content-comment{
+    max-height: 525px;
+    overflow: scroll;
+    margin-bottom: 70px;
+}
+
+.like-dev button{
+background: transparent !important;
+padding: 0;
+margin-right: 7px;
+}
+.like-dev button:focus,
+.like-dev button:focus-visible{
+    box-shadow: unset !important;
+ }
+.like-dev .btn-secondry{
+    color: #74788d;
+}
+.like-dev .btn-primary{
+    border: unset !important;
+}
+.like-dev .btn-primary span{
+    color: #007bff;
+}
+.like-dev .btn-primary:focus{
+   box-shadow: unset !important;
+}
+.like-dev .btn-primary i{
+    color: #007bff;
+}
+
+.like-dev .btn-primary:hover{
+    background-color: transparent !important;
+}
 
 
+.like-dev .btn-danger{
+    border: unset !important;
+}
+.like-dev .btn-danger span{
+    color:#c82333;
+}
+.like-dev .btn-danger:focus{
+   box-shadow: unset !important;
+}
+.like-dev .btn-danger i{
+    color: #c82333;
+}
+
+.like-dev .btn-danger:hover{
+    background-color: transparent !important;
+}
+
+
+/* change comment scroll  */
+
+.content-comment::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-comment::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(255, 255, 255);
+    -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255);
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+
+.content-comment::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    box-shadow: inset 13px 0px 2px hsl(0, 0%, 67%);
+    -webkit-box-shadow: inset 13px 0px 2px hsl(0, 0%, 67%);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border: 1px solid hsl(0, 0%, 67%);
+}
 
 .kt-avatar {
     position: relative;
@@ -777,4 +847,55 @@ hr{
 
 textarea.form-control {
     height: auto !important;
+}
+
+
+
+/* change comment scroll  */
+
+.notification::-webkit-scrollbar {
+    width: 8px;
+}
+
+.notification::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(255, 255, 255);
+    -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255);
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+
+.notification::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    box-shadow: inset 13px 0px 2px hsl(0, 0%, 67%);
+    -webkit-box-shadow: inset 13px 0px 2px hsl(0, 0%, 67%);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border: 1px solid hsl(0, 0%, 67%);
+}
+
+
+.img-notify{
+    width: 60px;
+    height: 60px;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    margin: auto;
+    /* margin-right: 20px; */
+}
+
+
+.profile-img-modal{
+    width: 400px;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
+
 }

@@ -41,6 +41,7 @@
     use App\Models\category;
     $categories = category::limit(3)->get();
     $visitors = Visitor::all();
+    
 
 
 
@@ -90,7 +91,7 @@
                     <div class='avatar-wrapper' id='avatarWrapper'>
                         @if(Auth::user()->image == null)
                       {{-- <img alt='Profile Photo' class='avatar-photo' height='28' src="{{ asset('cms/dist/img/user1.svg') }}" width='28'> --}}
-                      <div class="img-visitor-logo" style="background-image: url({{ asset('cms/dist/img/user1.svg') }})"></div>
+                      <div class="img-visitor-logo" style="background-image: url({{  asset('cms/dist/img/user.png') }})"></div>
 
                       @else
                       {{-- <img alt='Profile Photo' class='avatar-photo img-responsive' height='28' src="{{ asset('storage/images/visitor/'.Auth::user()->image) }}" width='28'> --}}
@@ -107,7 +108,7 @@
                       <div class='dropdown-profile-details'>
                         @if(Auth::user()->image == null)
                         {{-- <img alt='Profile Photo' class='avatar-photo' height='28' src="{{ asset('cms/dist/img/user1.svg') }}" width='28'> --}}
-                        <div class="img-visitor" style="background-image: url({{ asset('cms/dist/img/user1.svg') }})"></div>
+                        <div class="img-visitor" style="background-image: url({{  asset('cms/dist/img/user.png') }})"></div>
 
                         @else
                         {{-- <img alt='Profile Photo' class='avatar-photo img-responsive'  height='28' src="{{ asset('storage/images/visitor/'.Auth::user()->image) }}" width='28'> --}}
